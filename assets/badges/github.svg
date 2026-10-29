@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="94" height="28" viewBox="0 0 94 28" role="img" aria-label="GitHub">
+<title>GitHub</title>
+<rect x=".5" y=".5" width="93" height="27" rx="7" fill="#0b1730" stroke="#254b7d"/>
+<g font-family="Segoe UI,Arial,sans-serif"><g transform="translate(9 5.0) scale(0.75)" fill="none" stroke="#69acff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18c-4 1-4-2-6-2m12 5v-3.2c0-.9.3-1.6.7-2.1 3-.3 6.3-1.5 6.3-7A5.4 5.4 0 0 0 20.5 5c.1-.9.1-2.1-.5-3-1.8 0-3 1-3.7 1.5a13 13 0 0 0-6.6 0C9 3 7.8 2 6 2c-.6.9-.6 2.1-.5 3A5.4 5.4 0 0 0 4 8.7c0 5.5 3.3 6.7 6.3 7 .4.5.7 1.2.7 2.1V21"/></g><text x="35" y="18.0" fill="#d6e7ff" font-size="12" font-weight="600">GitHub</text></g>
+</svg>
