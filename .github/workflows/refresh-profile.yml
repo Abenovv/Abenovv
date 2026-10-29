@@ -11,7 +11,10 @@ on:
       - content/**
       - package.json
       - package-lock.json
-      - assets/portrait-ascii.json
+      - assets/portrait*
+      - assets/badges/**
+      - assets/languages/**
+      - assets/screens/**
       - .github/workflows/refresh-profile.yml
 
 permissions:
@@ -33,7 +36,7 @@ jobs:
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '24'
-      - name: Fetch public metrics and render GitAscii dashboard
+      - name: Refresh public profile data and artwork
         run: node scripts/refresh.mjs
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -54,7 +57,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- README.md assets/dashboard.svg assets/dashboard-mobile.svg assets/dashboard-phone.svg assets/snake-title.svg assets/contribution-snake.svg assets/contribution-static.svg assets/profile-data.json
+          git add -- README.md assets/dashboard.svg assets/dashboard-mobile.svg assets/dashboard-phone.svg assets/snake-title.svg assets/contribution-snake.svg assets/contribution-static.svg assets/profile-data.json assets/intro-motion.svg assets/intro-static.svg
           if ! git diff --cached --quiet; then
             git commit -m 'Refresh public profile metrics and blue snake [skip ci]'
             git push origin HEAD:main

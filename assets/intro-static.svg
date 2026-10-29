@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="48" viewBox="0 0 800 48" fill="none" role="img">
+<title>Blue flowing line</title>
+<defs><linearGradient id="intro-ink" x1="18" y1="24" x2="782" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#397fd1" stop-opacity="0.15"/><stop offset="0.42" stop-color="#66bdff"/><stop offset="0.58" stop-color="#92d9ff"/><stop offset="1" stop-color="#397fd1" stop-opacity="0.15"/></linearGradient></defs>
+<path d="M18 24H294C330 24 332 12 364 12C396 12 398 36 430 36C462 36 464 24 500 24H782" stroke="#203a57" stroke-width="1" opacity="0.45"/>
+<path d="M18 24H294C330 24 332 12 364 12C396 12 398 36 430 36C462 36 464 24 500 24H782" pathLength="1" stroke="url(#intro-ink)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="1" stroke-dashoffset="0"></path>
+<circle cx="400" cy="24" r="13" stroke="#66bdff" stroke-width="1" opacity="0.32"></circle>
+<circle cx="18" cy="24" r="1.5" fill="#5b9fd5" opacity="0.5"/><circle cx="782" cy="24" r="1.5" fill="#5b9fd5" opacity="0.5"/>
+
+</svg>

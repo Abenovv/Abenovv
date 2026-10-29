@@ -53,10 +53,16 @@ test('data requests cannot send headers to an unexpected host',async()=>{
 });
 test('render rebuilds deterministically from explicit content sources',async()=>{
   const root=new URL('../',import.meta.url);
-  const files=['README.md','assets/dashboard.svg','assets/dashboard-mobile.svg','assets/dashboard-phone.svg','assets/contribution-static.svg'];
-  const before=await Promise.all(files.map(path=>readFile(new URL(path,root))));
+  const readme=await readFile(new URL('README.md',root),'utf8');
+  const referencedImages=Array.from(readme.matchAll(/(?:src|srcset)="(assets\/[^"]+)"/g),m=>m[1].split(/[?#]/)[0]);
+  const files=[...new Set(['README.md','assets/dashboard.svg','assets/dashboard-mobile.svg','assets/dashboard-phone.svg','assets/contribution-static.svg',...referencedImages])];
+  const comparable=async path=>{
+    const bytes=await readFile(new URL(path,root));
+    return /\.(?:md|svg)$/.test(path)?Buffer.from(bytes.toString('utf8').replace(/\r\n/g,'\n')):bytes;
+  };
+  const before=await Promise.all(files.map(comparable));
   const run=spawnSync(process.execPath,['scripts/render.mjs'],{cwd:root,encoding:'utf8'});
   assert.equal(run.status,0,run.stderr);
-  const after=await Promise.all(files.map(path=>readFile(new URL(path,root))));
+  const after=await Promise.all(files.map(comparable));
   after.forEach((bytes,i)=>assert.deepEqual(bytes,before[i],files[i]));
 });

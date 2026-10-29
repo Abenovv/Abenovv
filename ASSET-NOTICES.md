@@ -1,10 +1,12 @@
 # Asset notices
 
-## Current terminal profile and automatic refresh
+## Current personal profile and automatic refresh
 
 The current project preview is an unchanged native Obsidian capture from `docs/images/obsidian-practice.png` in the user's public Quiz maker repository. Older browser-preview assets below are retained as prior revisions. The static contribution calendar uses the same dated records as the dashboard; the README selects it for reduced motion.
 
-The current README uses GitAscii's real canvas conversion, terminal info renderer, and language chart renderer, plus Mauro de Souza's Profile Readme Generator social-section parser and original social icons. Source revisions, modifications, and full GPL/MIT license texts are retained in [scripts/vendor](scripts/vendor/SOURCES.md). The profile composition scripts are GPL-3.0-or-later. The original photograph remains local; only its derived ASCII portrait is published. The portrait and biography remain the owner's personal content.
+The current README uses native GitHub text and a cropped photograph of the profile owner. The original photograph remains local; `assets/portrait-photo.jpg` is a locally created head-and-shoulders crop with a restrained navy frame, without synthetic facial changes. The optional `portrait-blue.svg` and saved ASCII lines were made with GitAscii's real canvas converter. Source revisions, modifications, and full GPL/MIT license texts for GitAscii and Mauro de Souza's Profile Readme Generator are retained in [scripts/vendor](scripts/vendor/SOURCES.md). The profile composition scripts are GPL-3.0-or-later. The portrait and biography remain the owner's personal content.
+
+The blue introductory line is locally authored, runs once, and has a matching static version for reduced motion. Contact badges and language tiles use the profile's existing navy artwork. Generator attribution and maintenance information are kept in these notices rather than the personal introduction.
 
 The [profile workflow](.github/workflows/refresh-profile.yml) refreshes public GitHub metrics and the blue Platane/snk SVG animation twice daily. See [PROFILE-AUTOMATION.md](PROFILE-AUTOMATION.md) for data scope, timing, refresh commands, and failure behavior. Earlier snapshot assets below are retained as unused prior revisions.
 
