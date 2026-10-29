@@ -4,31 +4,7 @@
   <img src="assets/dashboard.svg" alt="Yerkebulan Abenov — Computer Science student at Astana IT University, based in Astana. Open to internships, junior roles, and open-source collaboration. Live public GitHub metrics and code language chart." width="100%" />
 </picture>
 
-<div data-importer="socials" align="center">
-      <a href="https://www.linkedin.com/in/yerkebulanabenov/" target="_blank">
-      <img src="assets/socials/linkedin.svg" width="38" height="30" alt="linkedin logo" />
-    </a>
-
-
-    <a href="https://t.me/abenovv_7" target="_blank">
-      <img src="assets/socials/telegram.svg" width="38" height="30" alt="telegram logo" />
-    </a>
-
-
-    <a href="mailto:yerkebulanabenov7@gmail.com" target="_blank">
-      <img src="assets/socials/gmail.svg" width="38" height="30" alt="gmail logo" />
-    </a>
-
-
-    <a href="https://www.youtube.com/@Abenovv.7" target="_blank">
-      <img src="assets/socials/youtube.svg" width="38" height="30" alt="youtube logo" />
-    </a>
-
-
-    <a href="https://www.instagram.com/abenov.yerkebulan/" target="_blank">
-      <img src="assets/socials/instagram.svg" width="38" height="30" alt="instagram logo" />
-    </a>
-    </div>
+<div data-importer="socials" align="center"><a href="https://www.linkedin.com/in/yerkebulanabenov/" target="_blank"><img src="assets/socials/linkedin.svg" width="38" height="30" alt="linkedin logo" /></a><a href="https://t.me/abenovv_7" target="_blank"><img src="assets/socials/telegram.svg" width="38" height="30" alt="telegram logo" /></a><a href="mailto:yerkebulanabenov7@gmail.com" target="_blank"><img src="assets/socials/gmail.svg" width="38" height="30" alt="gmail logo" /></a><a href="https://www.youtube.com/@Abenovv.7" target="_blank"><img src="assets/socials/youtube.svg" width="38" height="30" alt="youtube logo" /></a><a href="https://www.instagram.com/abenov.yerkebulan/" target="_blank"><img src="assets/socials/instagram.svg" width="38" height="30" alt="instagram logo" /></a></div>
 
 <p><img src="assets/snake-title.svg" alt="Blue contribution snake" width="100%" /><img src="assets/contribution-snake.svg" alt="Automatically refreshed blue snake animation of my GitHub contribution calendar" width="100%" /></p>
 

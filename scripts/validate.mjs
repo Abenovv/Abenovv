@@ -24,4 +24,5 @@ for(const path of ['assets/dashboard.svg','assets/dashboard-mobile.svg','assets/
 }
 assert(!readme.includes('developer-blue-v2.png'),'Old hero must not duplicate ASCII portrait');
 assert(readme.includes('maurodesouza/profile-readme-generator')&&readme.includes('Igorcbraz/GitAscii'));
+assert(!/^ {4,}<a href=/m.test(readme),'Indented social HTML would become a Markdown code block on GitHub');
 console.log(`PASS: ${refs} README image references; public metrics reconcile; original photo excluded; safe self-contained SVGs.`);

@@ -83,7 +83,7 @@ const socials=socialsSectionParser({content:{socials:{
   linkedin:{link:'https://www.linkedin.com/in/yerkebulanabenov/'},
   telegram:{link:'https://t.me/abenovv_7'},gmail:{link:'mailto:yerkebulanabenov7@gmail.com'},
   youtube:{link:'https://www.youtube.com/@Abenovv.7'},instagram:{link:'https://www.instagram.com/abenov.yerkebulan/'}
-},styles:{type:'icon',style:'default',height:30}},styles:{align:'center',spacing:8}});
+},styles:{type:'icon',style:'default',height:30}},styles:{align:'center',spacing:8}}).replace(/\n\s*/g,'').trim();
 const old=await read('README.md');
 const project=old.match(/<details>[\s\S]*?<summary><strong>Preview and project details<\/strong><\/summary>[\s\S]*?<\/details>/)?.[0]||'';
 const background=old.match(/<details>\s*<summary><strong>Background &amp; highlights<\/strong><\/summary>[\s\S]*?<\/details>/)?.[0]||'';
