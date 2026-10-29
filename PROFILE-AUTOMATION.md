@@ -4,7 +4,7 @@ The [Refresh profile workflow](https://github.com/Abenovv/Abenovv/actions/workfl
 
 The job uses only the automatic, short-lived repository `GITHUB_TOKEN`. No personal access token, GitAscii account, GitHub App installation, paid plan, or extra secret is needed. GitAscii renderers run locally within the job; no portrait is uploaded to a third-party editor.
 
-Data: GitHub public profile and all pages of owned public repositories; non-fork stars; language byte counts from owned public non-forks (this generated profile excluded); rolling-year contribution calendar. The chart normalizes its five displayed languages. It describes repository code, not skill levels. The six hand-picked language icons are the user's stated languages.
+Data: GitHub public profile and all pages of owned public repositories; non-fork stars retained in the data file; language byte counts from owned public non-forks (this generated profile excluded); rolling-year contribution calendar. The expandable language table uses the full language aggregate. Retained standalone GitAscii chart assets normalize their five displayed languages. The six hand-picked language icons are the user's stated languages.
 
 The workflow fetches the calendar directly through GitHub GraphQL and Platane/snk. Anonymous local previews use the public Contributions API. API errors, missing dates, or stale data fail the refresh and preserve the last committed assets. Every refresh is an ordinary Git commit and can be reviewed or reverted.
 
