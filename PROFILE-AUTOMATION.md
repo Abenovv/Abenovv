@@ -10,6 +10,8 @@ The workflow fetches the calendar directly through GitHub GraphQL and Platane/sn
 
 Temporary network/server failures are retried up to three times. Permanent API errors stop the job. Generated dashboards have separate desktop, tablet, and phone layouts. The blue snake switches to the static calendar for `prefers-reduced-motion`; clicking it also opens that static view. All assets remain self-contained.
 
+Generated image URLs include their content hash. When data or rendering changes, the README receives a new image URL so browser/GitHub caches request the new version. The workflow renders the final embeds after the snake generator finishes, keeping both versions current.
+
 ## Local commands
 
 Node 24 is required. Runtime refresh/render/test scripts use Node built-ins and the vendored TypeScript renderers; no dependency install is needed in Actions.

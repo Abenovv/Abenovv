@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 import {readFile,access} from 'node:fs/promises';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {aggregateLanguages,validateCalendar} from './data.mjs';
 const root=new URL('../',import.meta.url);
 const read=path=>readFile(new URL(path,root),'utf8');
@@ -14,7 +15,14 @@ assert.equal(ascii.lines.length,ascii.rows);
 assert(ascii.lines.every(l=>l.length===ascii.cols));
 const readme=await read('README.md');
 let refs=0;
-for(const m of readme.matchAll(/(?:src|srcset)="(assets\/[^"]+)"/g)) {await access(new URL(m[1],root));refs++;}
+for(const m of readme.matchAll(/(?:src|srcset)="(assets\/[^"]+)"/g)) {
+  const url=new URL(m[1],root);
+  await access(url);refs++;
+  if(url.searchParams.has('v')) {
+    const contents=(await readFile(url,'utf8')).replace(/\r\n/g,'\n');
+    assert.equal(url.searchParams.get('v'),createHash('sha256').update(contents).digest('hex').slice(0,12),'Cached image version does not match its content');
+  }
+}
 assert(refs>=8,'Expected dashboards, social icons, screenshot and snake');
 for(const path of ['assets/dashboard.svg','assets/dashboard-mobile.svg','assets/dashboard-phone.svg','assets/contribution-snake.svg','assets/contribution-static.svg','assets/snake-title.svg']) {
   const svg=await read(path);
@@ -27,6 +35,7 @@ assert(readme.includes('maurodesouza/profile-readme-generator')&&readme.includes
 assert(!/^ {4,}<a href=/m.test(readme),'Indented social HTML would become a Markdown code block on GitHub');
 assert(readme.includes('(prefers-reduced-motion: reduce)'));
 assert(readme.includes('(max-width: 1012px)'));
+assert(/dashboard-phone\.svg\?v=[a-f0-9]{12}/.test(readme),'Generated images need content versions');
 assert(readme.includes('#inside-obsidian')&&!readme.includes('#appearance'));
 assert(readme.includes(`${data.calendar.total} public contributions`),'Metric alt text must refresh with the data');
 console.log(`PASS: ${refs} README image references; public metrics reconcile; original photo excluded; safe self-contained SVGs.`);

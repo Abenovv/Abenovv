@@ -43,6 +43,8 @@ jobs:
         with:
           github_user_name: Abenovv
           outputs: assets/contribution-snake.svg?color_snake=#74ccff&color_dots=#101e33,#17375e,#245c96,#398fce,#8bd8ff
+      - name: Embed the current generated asset versions
+        run: node scripts/render.mjs
       - name: Validate generated profile
         run: |
           node --test scripts/profile.test.mjs
