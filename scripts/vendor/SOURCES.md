@@ -12,6 +12,8 @@ Original paths: `src/engine/ascii/converter.ts`, `src/engine/core/xmlUtils.ts`, 
 
 Changes dated 30 October 2026: replace alias imports with local paths, erase unused type-only imports for direct Node 24 execution, correct the stats label from Commits to Contrib (the source value counts all contributions). Rendering calls are made by `scripts/render.mjs`; portrait conversion uses the original canvas converter with a local Canvas adapter. No synthetic face generator is used for this portrait.
 
+Final audit adaptation: the terminal-info renderer accepts a clamped fontSize override so the phone card can display larger text and put its metrics on separate rows.
+
 ## Profile Readme Generator — Mauro de Souza
 
 Source: https://github.com/maurodesouza/profile-readme-generator/tree/10cf0a2f3bfb1672b23c7d4966673d184b26a4b4

@@ -44,7 +44,7 @@ async function skillContent(w,h,mobile=false) {
 }
 function info(w,h,mobile=false) {
   // Mobile values are shorter to stay readable in the same real GitAscii renderer.
-  const mobileConfig=mobile?{...config,customStatus:'Internships / junior roles',customHighlights:'CS / Astana IT University'}:config;
+  const mobileConfig=mobile?{...config,customStatus:'Internships / junior roles',customHighlights:'CS / Astana IT University',...(w<330?{fontSize:14,customLocation:'Astana, KZ',customStatus:'Open to roles',customHighlights:'CS / AITU'}:{})}:config;
   return `<g transform="translate(8 20)">${renderTerminalInfo({size:{width:w-16,height:h-20},config:mobileConfig},data,styles)}</g>`+
     text(20,h-17,`${data.calendar.activeDays} active days / rolling year`,10,muted);
 }
@@ -64,16 +64,17 @@ const desktop=header(800,508,'Yerkebulan Abenov — ASCII portrait, public GitHu
   text(788,504,'BUILD TO LEARN. SHARE TO GROW.',9,muted,'text-anchor="end"')+'</g></svg>';
 async function mobileDashboard(width) {
   const cardWidth=width-16;
-  return header(width,724,'Yerkebulan Abenov — mobile profile and public GitHub metrics')+
+  const extra=width<350?60:0;
+  return header(width,724+extra,'Yerkebulan Abenov — mobile profile and public GitHub metrics')+
   text(12,25,'YERKEBULAN ABENOV',20,ink,'font-weight="700"')+
   frame(8,42,142,156,portraitArt(142,156))+
   text(166,76,'SOFTWARE',15,accent)+text(166,97,'DEVELOPER',15,accent)+
   text(166,129,'Computer Science',12)+text(166,151,'Astana IT University',11,muted)+
   text(166,182,'LEARN / BUILD / SHARE',10,muted)+
-  frame(8,208,cardWidth,220,info(cardWidth,220,true))+
-  frame(8,438,cardWidth,162,languages(cardWidth,162))+
-  frame(8,610,cardWidth,92,await skillContent(cardWidth,92,true))+
-  text(12,719,`AUTO REFRESH / ${data.updatedDate} / UTC+05:00`,9,muted)+'</g></svg>';
+  frame(8,208,cardWidth,220+extra,info(cardWidth,220+extra,true))+
+  frame(8,438+extra,cardWidth,162,languages(cardWidth,162))+
+  frame(8,610+extra,cardWidth,92,await skillContent(cardWidth,92,true))+
+  text(12,719+extra,`AUTO REFRESH / ${data.updatedDate} / UTC+05:00`,9,muted)+'</g></svg>';
 }
 const mobile=await mobileDashboard(390);
 const phone=await mobileDashboard(320);

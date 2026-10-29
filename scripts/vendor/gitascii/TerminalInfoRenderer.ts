@@ -48,7 +48,10 @@ export function renderTerminalInfo(
   const statsValClr = (cfg.statsValColor as string) || '#79c0ff'
   const dividerClr = (cfg.dividerColor as string) || '#3d444d'
 
-  const fontSize = width < 320 ? 11 : width < 420 ? 12 : 14
+  // Local accessibility adaptation: allow the compact phone card to use larger type.
+  const fontSize = Number(cfg.fontSize) > 0
+    ? Math.max(11, Math.min(18, Number(cfg.fontSize)))
+    : width < 320 ? 11 : width < 420 ? 12 : 14
   const fontCharWidth = fontSize * 0.6
   const paddingX = 12
   const totalChars = Math.max(16, Math.floor((width - paddingX * 2) / fontCharWidth))
