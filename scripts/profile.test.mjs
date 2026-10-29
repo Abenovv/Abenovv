@@ -2,6 +2,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {aggregateLanguages, validateCalendar} from './data.mjs';
+import {requestJson} from './http.mjs';
+import {readFile} from 'node:fs/promises';
+import {spawnSync} from 'node:child_process';
 
 test('language chart sums bytes only across owned originals, excluding profile art',()=>{
   assert.deepEqual(aggregateLanguages([
@@ -22,4 +25,38 @@ test('duplicates, missing dates and invalid counts cannot replace good data',()=
   for(const mutate of [d=>d.splice(100,1),d=>{d[2].date=d[1].date},d=>{d[4].count=-1}]) {
     const days=calendar();mutate(days);assert.throws(()=>validateCalendar(days));
   }
+});
+
+test('invalid civil dates are rejected even when Date.parse normalizes them',()=>{
+  const days=calendar();days[0].date='2025-02-30';assert.throws(()=>validateCalendar(days));
+});
+test('temporary network and server failures recover with bounded retries',async()=>{
+  let calls=0;
+  const result=await requestJson('https://api.github.com/users/Abenovv',{
+    fetchImpl:async()=>{calls++;if(calls===1) throw new Error('temporary network failure');if(calls===2)return {ok:false,status:503};return {ok:true,json:async()=>({login:'Abenovv'})};},sleep:async()=>{}
+  });
+  assert.deepEqual(result,{login:'Abenovv'});assert.equal(calls,3);
+});
+test('persistent failures stop and permanent failures do not retry',async()=>{
+  for(const status of [503,403]) {
+    let calls=0;
+    await assert.rejects(requestJson('https://api.github.com/users/Abenovv',{
+      fetchImpl:async()=>{calls++;return {ok:false,status};},sleep:async()=>{}
+    }));
+    assert.equal(calls,status===503?3:1);
+  }
+});
+test('data requests cannot send headers to an unexpected host',async()=>{
+  let called=false;
+  await assert.rejects(requestJson('https://example.com/',{fetchImpl:async()=>{called=true;}}));
+  assert.equal(called,false);
+});
+test('render rebuilds deterministically from explicit content sources',async()=>{
+  const root=new URL('../',import.meta.url);
+  const files=['README.md','assets/dashboard.svg','assets/dashboard-mobile.svg','assets/dashboard-phone.svg','assets/contribution-static.svg'];
+  const before=await Promise.all(files.map(path=>readFile(new URL(path,root))));
+  const run=spawnSync(process.execPath,['scripts/render.mjs'],{cwd:root,encoding:'utf8'});
+  assert.equal(run.status,0,run.stderr);
+  const after=await Promise.all(files.map(path=>readFile(new URL(path,root))));
+  after.forEach((bytes,i)=>assert.deepEqual(bytes,before[i],files[i]));
 });

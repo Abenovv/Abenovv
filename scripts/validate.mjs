@@ -16,7 +16,7 @@ const readme=await read('README.md');
 let refs=0;
 for(const m of readme.matchAll(/(?:src|srcset)="(assets\/[^"]+)"/g)) {await access(new URL(m[1],root));refs++;}
 assert(refs>=8,'Expected dashboards, social icons, screenshot and snake');
-for(const path of ['assets/dashboard.svg','assets/dashboard-mobile.svg','assets/contribution-snake.svg','assets/snake-title.svg']) {
+for(const path of ['assets/dashboard.svg','assets/dashboard-mobile.svg','assets/dashboard-phone.svg','assets/contribution-snake.svg','assets/contribution-static.svg','assets/snake-title.svg']) {
   const svg=await read(path);
   assert(svg.includes('<svg')&&svg.includes('</svg>'),`${path}: malformed SVG`);
   assert(!/<script|foreignObject|@import|\son\w+=/i.test(svg),`${path}: unsupported SVG content`);
@@ -25,4 +25,8 @@ for(const path of ['assets/dashboard.svg','assets/dashboard-mobile.svg','assets/
 assert(!readme.includes('developer-blue-v2.png'),'Old hero must not duplicate ASCII portrait');
 assert(readme.includes('maurodesouza/profile-readme-generator')&&readme.includes('Igorcbraz/GitAscii'));
 assert(!/^ {4,}<a href=/m.test(readme),'Indented social HTML would become a Markdown code block on GitHub');
+assert(readme.includes('(prefers-reduced-motion: reduce)'));
+assert(readme.includes('(max-width: 1012px)'));
+assert(readme.includes('#inside-obsidian')&&!readme.includes('#appearance'));
+assert(readme.includes(`${data.calendar.total} public contributions`),'Metric alt text must refresh with the data');
 console.log(`PASS: ${refs} README image references; public metrics reconcile; original photo excluded; safe self-contained SVGs.`);

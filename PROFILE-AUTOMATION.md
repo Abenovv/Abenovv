@@ -8,6 +8,8 @@ Data: GitHub public profile and all pages of owned public repositories; non-fork
 
 The workflow fetches the calendar directly through GitHub GraphQL and Platane/snk. Anonymous local previews use the public Contributions API. API errors, missing dates, or stale data fail the refresh and preserve the last committed assets. Every refresh is an ordinary Git commit and can be reviewed or reverted.
 
+Temporary network/server failures are retried up to three times. Permanent API errors stop the job. Generated dashboards have separate desktop, tablet, and phone layouts. The blue snake switches to the static calendar for `prefers-reduced-motion`; clicking it also opens that static view. All assets remain self-contained.
+
 ## Local commands
 
 Node 24 is required. Runtime refresh/render/test scripts use Node built-ins and the vendored TypeScript renderers; no dependency install is needed in Actions.
@@ -16,11 +18,14 @@ Node 24 is required. Runtime refresh/render/test scripts use Node built-ins and 
 npm run refresh
 npm test
 npm run check
+python scripts/validate-svg.py
 ```
 
 The original portrait stays off-repository. `assets/portrait-ascii.json` stores the derived ASCII lines. To replace it locally, install the locked development dependencies with `npm ci --ignore-scripts`, then run `node scripts/portrait.mjs /exact/path/to/photo.jpg` and `npm run render`. Preview rasterization uses the development-only resvg package.
 
 ## Source and licenses
+
+Edit `content/project.html` and `content/background.html` for the expandable profile sections. They are explicit sources; rebuilds do not scrape content from the generated README. The project preview uses its public native Obsidian screenshot and links to the current `Inside Obsidian` section.
 
 - GitAscii GPL-3.0-or-later renderer code: pinned revision `456d4cfaf6ee8a04724c0d17cf17206360f51e7e`. See `scripts/vendor/gitascii/LICENSE` and `SOURCES.md`. Local renderer/adapters are also GPL-3.0-or-later.
 - Mauro de Souza's Profile Readme Generator MIT social-section parser and five original social SVGs: pinned revision `10cf0a2f3bfb1672b23c7d4966673d184b26a4b4`. See `scripts/vendor/profile-readme-generator/LICENSE.md`.

@@ -2,6 +2,8 @@
 
 ## Current terminal profile and automatic refresh
 
+The current project preview is an unchanged native Obsidian capture from `docs/images/obsidian-practice.png` in the user's public Quiz maker repository. Older browser-preview assets below are retained as prior revisions. The static contribution calendar uses the same dated records as the dashboard; the README selects it for reduced motion.
+
 The current README uses GitAscii's real canvas conversion, terminal info renderer, and language chart renderer, plus Mauro de Souza's Profile Readme Generator social-section parser and original social icons. Source revisions, modifications, and full GPL/MIT license texts are retained in [scripts/vendor](scripts/vendor/SOURCES.md). The profile composition scripts are GPL-3.0-or-later. The original photograph remains local; only its derived ASCII portrait is published. The portrait and biography remain the owner's personal content.
 
 The [profile workflow](.github/workflows/refresh-profile.yml) refreshes public GitHub metrics and the blue Platane/snk SVG animation twice daily. See [PROFILE-AUTOMATION.md](PROFILE-AUTOMATION.md) for data scope, timing, refresh commands, and failure behavior. Earlier snapshot assets below are retained as unused prior revisions.

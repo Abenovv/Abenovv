@@ -17,7 +17,8 @@ export function validateCalendar(days) {
   const seen = new Set();
   for (let i=0; i<days.length; i++) {
     const d=days[i];
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(d.date) || !Number.isSafeInteger(d.count) || d.count<0 || seen.has(d.date)) throw new Error('Invalid calendar entry');
+    const timestamp=Date.parse(d.date);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(d.date) || !Number.isFinite(timestamp) || new Date(timestamp).toISOString().slice(0,10)!==d.date || !Number.isSafeInteger(d.count) || d.count<0 || seen.has(d.date)) throw new Error('Invalid calendar entry');
     if (i && Date.parse(d.date)-Date.parse(days[i-1].date)!==86400000) throw new Error('Calendar has a gap');
     seen.add(d.date);
   }

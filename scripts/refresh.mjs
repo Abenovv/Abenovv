@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 import { writeFile } from 'node:fs/promises';
 import { aggregateLanguages, validateCalendar, USERNAME } from './data.mjs';
+import { requestJson } from './http.mjs';
 
 // The short-lived GitHub Actions token is used only by GitHub APIs during workflow execution.
 // Local runs are anonymous and never inspect credential stores or browser sessions.
@@ -8,13 +9,7 @@ const token = process.env.GITHUB_TOKEN;
 const headers = { Accept:'application/vnd.github+json', 'Content-Type':'application/json', 'User-Agent':'Abenovv-Profile-Refresh',
   ...(token ? {Authorization:`Bearer ${token}`} : {}) };
 async function request(path, init={}) {
-  for (let attempt=0; attempt<3; attempt++) {
-    const response = await fetch(`https://api.github.com${path}`, {...init, headers,
-      signal:AbortSignal.timeout(30000)});
-    if (response.ok) return response.json();
-    if (response.status<500 || attempt===2) throw new Error(`GitHub ${response.status}: ${path}`);
-    await new Promise(r=>setTimeout(r,1000*(attempt+1)));
-  }
+  return requestJson(`https://api.github.com${path}`, {...init, headers});
 }
 const profile = await request(`/users/${USERNAME}`);
 if (profile.login.toLowerCase()!==USERNAME.toLowerCase()) throw new Error('Wrong profile');
@@ -46,9 +41,7 @@ if(token) {
   calendarSource='https://api.github.com/graphql';
 } else {
   const url=`https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`;
-  const response=await fetch(url,{signal:AbortSignal.timeout(30000)});
-  if(!response.ok) throw new Error('Public contribution service unavailable');
-  days=(await response.json()).contributions.map(d=>({date:d.date,count:d.count}));
+  days=(await requestJson(url)).contributions.map(d=>({date:d.date,count:d.count}));
   calendarSource=url;
 }
 days.sort((a,b)=>a.date.localeCompare(b.date));
