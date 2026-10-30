@@ -1,7 +1,6 @@
 <!-- Generated from content/ and public profile data. See PROFILE-AUTOMATION.md for maintenance. -->
 <h1 align="center">Yerkebulan Abenov</h1>
 <p align="center">Computer Science student · Software developer</p>
-<p align="center"><img src="assets/portrait-photo.jpg?v=4950fb4b15b2" alt="Yerkebulan Abenov" width="180" height="225" /></p>
 
 <div data-importer="socials" align="center"><a href="https://www.linkedin.com/in/yerkebulanabenov/" target="_blank"><img src="assets/badges/linkedin.svg" height="26" alt="linkedin" /></a> <a href="https://t.me/abenovv_7" target="_blank"><img src="assets/badges/telegram.svg" height="26" alt="telegram" /></a> <a href="mailto:yerkebulanabenov7@gmail.com" target="_blank"><img src="assets/badges/email.svg" height="26" alt="Email" /></a> <a href="https://www.youtube.com/@Abenovv.7" target="_blank"><img src="assets/badges/youtube.svg" height="26" alt="youtube" /></a> <a href="https://www.instagram.com/abenov.yerkebulan/" target="_blank"><img src="assets/badges/instagram.svg" height="26" alt="instagram" /></a></div>
 
