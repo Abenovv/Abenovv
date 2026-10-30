@@ -1,24 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="390" height="156" viewBox="0 0 390 156" role="img"><title>Languages in my public projects</title><rect x=".5" y=".5" width="389" height="155" rx="8" fill="#091322" stroke="#254365"/>
 
-    <rect x="24" y="52" width="189.27909609676556" height="8" fill="#3178c6" rx="2" /><rect x="213.27909609676556" y="52" width="81.72030710523129" height="8" fill="#239120" rx="2" /><rect x="294.99940320199687" y="52" width="28.805507041338796" height="8" fill="#563d7c" rx="2" /><rect x="323.80491024333566" y="52" width="28.36758193246704" height="8" fill="#e34c26" rx="2" /><rect x="352.1724921758027" y="52" width="13.827507824197351" height="8" fill="#f1e05a" rx="2" />
+    <rect x="24" y="52" width="197.41009911226192" height="8" fill="#3178c6" rx="2" /><rect x="221.41009911226192" y="52" width="73.26082410228933" height="8" fill="#239120" rx="2" /><rect x="294.67092321455124" y="52" width="33.023488119038575" height="8" fill="#563d7c" rx="2" /><rect x="327.6944113335898" y="52" width="25.431040383703007" height="8" fill="#e34c26" rx="2" /><rect x="353.12545171729283" y="52" width="12.874548282707163" height="8" fill="#f1e05a" rx="2" />
       <g transform="translate(24, 80)">
         <circle cx="6" cy="-4" r="4" fill="#3178c6" />
-        <text x="16" y="0" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#dceaff">TypeScript <tspan fill="#a6bbd4">55%</tspan></text>
+        <text x="16" y="0" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#dceaff">TypeScript <tspan fill="#a6bbd4">58%</tspan></text>
       </g>
 
       <g transform="translate(195, 80)">
         <circle cx="6" cy="-4" r="4" fill="#239120" />
-        <text x="16" y="0" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#dceaff">C# <tspan fill="#a6bbd4">24%</tspan></text>
+        <text x="16" y="0" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#dceaff">C# <tspan fill="#a6bbd4">21%</tspan></text>
       </g>
 
       <g transform="translate(24, 104)">
         <circle cx="6" cy="-4" r="4" fill="#563d7c" />
-        <text x="16" y="0" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#dceaff">CSS <tspan fill="#a6bbd4">8%</tspan></text>
+        <text x="16" y="0" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#dceaff">CSS <tspan fill="#a6bbd4">10%</tspan></text>
       </g>
 
       <g transform="translate(195, 104)">
         <circle cx="6" cy="-4" r="4" fill="#e34c26" />
-        <text x="16" y="0" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#dceaff">HTML <tspan fill="#a6bbd4">8%</tspan></text>
+        <text x="16" y="0" font-family="Arial,Helvetica,sans-serif" font-size="12" fill="#dceaff">HTML <tspan fill="#a6bbd4">7%</tspan></text>
       </g>
 
       <g transform="translate(24, 128)">
