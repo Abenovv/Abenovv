@@ -14,6 +14,7 @@
   "rows": 120,
   "dots": 44307,
   "style": "refined-blue-braille",
+  "background": "transparent",
   "palette": "original-refined-B",
-  "approvedPreviewHash": "c9a2abca579995724b645cd06f42e9a3bbefdaa70f4a76972356d17204a12f0e"
+  "approvedPreviewHash": "66aca79b7cdf3d98eda94b999742f8c4b64b4509fff2d6a501412642f63ac627"
 }

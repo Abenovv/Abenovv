@@ -1,3 +1,3 @@
 # Next tasks
 
-Verify the published PNG portrait and contained snake on desktop and mobile. Keep unapproved comparison candidates local.
+Verify transparent portrait loading and compact portrait-column alignment after publishing. Keep unapproved comparison candidates local.
