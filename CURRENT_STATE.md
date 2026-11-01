@@ -5,3 +5,5 @@ Snake uses a closed, adjacent route inside the calendar; every segment remains i
 Profile uses the approved transparent refined B portrait. Only its necessary PNG, current SVGs, data, source scripts and license notices remain. Retired designs, screenshots, duplicate portraits, old generators and local comparison binaries were removed.
 
 Verified 801 browser frames (3,204 segment positions) across the full 32-second loop. All 12 tests and SVG/data checks pass. The published profile loads the new route and portrait. GitHub refresh run 41350953319 completed successfully. Clean tree contains 47 tracked files, including one necessary PNG.
+
+Profile introduction uses the owner-selected sentence: “Exploring software development through hands-on projects and continuous learning.”
