@@ -1,3 +1,3 @@
 # Current state
 
-Approved portrait: original refined B in soft blue Braille, full 433 × 577 source composition; 180 × 120 eight-dot cells and 44,307 dots. No ASCII overlay or hacker/cyan palette. Source image stays local. Offline generator: scripts/portrait-braille.mjs. Profile text, ranked languages, Quiz maker and scheduled activity refresh remain.
+Portrait uses the approved original refined B PNG directly: avoids blank SVG rendering while preserving the full image and palette. Snake segments are wrapped in a fixed calendar clip during render, including every scheduled refresh. Metrics and contribution animation remain automatic.

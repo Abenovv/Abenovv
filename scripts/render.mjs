@@ -5,6 +5,7 @@ import {createHash} from 'node:crypto';
 import {renderLanguages} from './vendor/gitascii/LanguagesRenderer.ts';
 import {escapeXml as esc} from './vendor/gitascii/xmlUtils.ts';
 import {techsSectionParser} from './vendor/profile-readme-generator/techs.ts';
+import {containSnake} from './contain-snake.mjs';
 import {rankedLanguages} from './layout.mjs';
 import {buildMotionAssets} from './motion-assets.mjs';
 import {buildShowcaseAssets,projectCounts} from './showcase-assets.mjs';
@@ -62,6 +63,7 @@ const [about,background]=await Promise.all([read('content/about.html'),read('con
 const portraitMotion=await assetVersion('assets/portrait-full-motion.svg');
 const portraitStatic=await assetVersion('assets/portrait-full.png');
 const staticUrl=await assetVersion('assets/contribution-static.svg');
+await writeFile(new URL('assets/contribution-snake.svg',root),containSnake(await read('assets/contribution-snake.svg')));
 const snakeUrl=await assetVersion('assets/contribution-snake.svg');
 const projectCells=await Promise.all(projects.map(async project=>{
   const url=`https://github.com/Abenovv/${project.repository}`;
@@ -76,7 +78,7 @@ const number=value=>Number(value).toLocaleString('en-US');
 const inlineIcons=icons.replace(/^<div[^>]*>/,'').replace(/<\/div>$/,'').replace(/\s*(&nbsp;)\s*/g,'$1').trim();
 const readme=`<!-- Generated from content/ and public profile data. See PROFILE-AUTOMATION.md for maintenance. -->
 <table width="100%"><tbody><tr>
-<td width="35%" valign="middle" align="center"><a href="${portraitStatic}"><picture><source media="(prefers-reduced-motion: reduce)" srcset="${portraitStatic}" /><img src="${portraitMotion}" alt="Yerkebulan Abenov, full supplied portrait in refined blue Braille, including shoulders and jacket" width="180" /></picture></a></td>
+<td width="35%" valign="middle" align="center"><a href="${portraitStatic}"><picture><source media="(prefers-reduced-motion: reduce)" srcset="${portraitStatic}" /><img src="${portraitStatic}" alt="Yerkebulan Abenov, full supplied portrait in refined blue Braille, including shoulders and jacket" width="180" /></picture></a></td>
 <td valign="middle"><p><strong>Developer · Computer Science student</strong><br /><sub>Astana, Kazakhstan</sub></p>${about.trim()}</td>
 </tr></tbody></table>
 <p><strong>Languages</strong> ${inlineIcons}</p>

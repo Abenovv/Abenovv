@@ -61,7 +61,9 @@ assert(readme.includes('github.com/Abenovv/quiz-maker-obsidian-edition'),'Select
 for(const forbidden of ['linkedin.com','t.me/','mailto:','youtube.com','instagram.com','assets/developer-blue','assets/screens/','Browser projects','More projects'])
   assert(!readme.includes(forbidden),`Removed content returned: ${forbidden}`);
 assert(readme.includes('(prefers-reduced-motion: reduce)'));
-assert(readme.includes('assets/portrait-full-motion.svg'),'Approved full portrait motion missing');
+assert(/<img src="assets\/portrait-full\.png\?/.test(readme),'Approved portrait must use the reliable PNG directly');
+const snake=await read('assets/contribution-snake.svg');
+assert(snake.includes('<g clip-path="url(#snake-grid-clip)">'),'Snake must stay within calendar bounds');
 assert((readme.match(/<table\b/g)||[]).length===2,'Expected rectangular portrait/about and project blocks');
 assert(new RegExp(`\\b${data.calendar.total}\\s+(?:public\\s+)?contributions\\b`).test(readme.replaceAll(',','')),'Accessible contribution metric must refresh with the data');
 assert(readme.includes('<h2>Open Source</h2>'),'Project showcase heading missing');

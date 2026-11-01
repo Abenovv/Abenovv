@@ -84,3 +84,13 @@ test('language icons reorder when repository usage changes and keep unobserved s
   assert.equal(b.find(x=>x.name==='C++').bytes,0);
   assert.equal(b.length,6);
 });
+
+test('snake containment clips a fixed parent and remains stable on repeated refreshes',async()=>{
+  const {containSnake}=await import('./contain-snake.mjs');
+  const source='<svg><rect class="c" x="2" y="2"/><rect class="c c1" x="34" y="98"/><rect class="s s0" x="0.8" y="0.8"/></svg>';
+  const contained=containSnake(source);
+  assert(contained.includes('<rect x="2" y="2" width="44" height="108"/>'));
+  assert(contained.includes('<g clip-path="url(#snake-grid-clip)"><rect class="s s0"'));
+  assert.equal(containSnake(contained),contained);
+  assert.throws(()=>containSnake('<svg/>'),/no calendar cells/);
+});
