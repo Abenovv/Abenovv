@@ -14,11 +14,11 @@
   },
   "totalStars": 0,
   "languages": {
-    "TypeScript": 733640,
+    "TypeScript": 785294,
     "C#": 272261,
-    "CSS": 122726,
+    "CSS": 121910,
     "HTML": 94510,
-    "JavaScript": 47846,
+    "JavaScript": 55064,
     "Java": 18492,
     "Shell": 1745,
     "PowerShell": 1068,
@@ -30,18 +30,21 @@
       "name": "Abenovv",
       "fork": false,
       "stars": 0,
+      "forks": 0,
       "languages": {}
     },
     {
       "name": "artcraft",
       "fork": true,
       "stars": 0,
+      "forks": 0,
       "languages": {}
     },
     {
       "name": "Assignment-5-of-ITFP",
       "fork": false,
       "stars": 0,
+      "forks": 0,
       "languages": {
         "C#": 26698
       }
@@ -50,6 +53,7 @@
       "name": "Assignment-6-of-ITFP",
       "fork": false,
       "stars": 0,
+      "forks": 0,
       "languages": {
         "C#": 52074
       }
@@ -58,6 +62,7 @@
       "name": "Assignment-7-of-ITFP",
       "fork": false,
       "stars": 0,
+      "forks": 0,
       "languages": {
         "C#": 74362
       }
@@ -66,6 +71,7 @@
       "name": "Assignment-8-of-ITFP",
       "fork": false,
       "stars": 0,
+      "forks": 0,
       "languages": {
         "C#": 119127,
         "PowerShell": 1068,
@@ -77,12 +83,14 @@
       "name": "expressBookReviews",
       "fork": true,
       "stars": 0,
+      "forks": 0,
       "languages": {}
     },
     {
       "name": "github-final-project",
       "fork": false,
       "stars": 0,
+      "forks": 0,
       "languages": {
         "Shell": 716
       }
@@ -91,6 +99,7 @@
       "name": "JavaOOP-endterm",
       "fork": false,
       "stars": 0,
+      "forks": 0,
       "languages": {
         "Java": 18492
       }
@@ -99,12 +108,14 @@
       "name": "mcino-Introduction-to-Git-and-GitHub",
       "fork": true,
       "stars": 0,
+      "forks": 0,
       "languages": {}
     },
     {
       "name": "Midterm-Web_Technologies-1stTerm",
       "fork": false,
       "stars": 0,
+      "forks": 0,
       "languages": {
         "HTML": 47463,
         "CSS": 11614,
@@ -115,16 +126,18 @@
       "name": "obsidian-quiz-generator-new-version",
       "fork": true,
       "stars": 0,
+      "forks": 0,
       "languages": {}
     },
     {
       "name": "quiz-maker-obsidian-edition",
       "fork": false,
       "stars": 0,
+      "forks": 0,
       "languages": {
-        "TypeScript": 733640,
-        "CSS": 91961,
-        "JavaScript": 22541,
+        "TypeScript": 785294,
+        "CSS": 91145,
+        "JavaScript": 29759,
         "HTML": 917
       }
     },
@@ -132,18 +145,21 @@
       "name": "rea",
       "fork": true,
       "stars": 0,
+      "forks": 0,
       "languages": {}
     },
     {
       "name": "skills",
       "fork": true,
       "stars": 0,
+      "forks": 0,
       "languages": {}
     },
     {
       "name": "Web-technologies-assigment-1",
       "fork": false,
       "stars": 0,
+      "forks": 0,
       "languages": {
         "HTML": 7614,
         "CSS": 1297
@@ -153,6 +169,7 @@
       "name": "Web-technology-4-assignment",
       "fork": false,
       "stars": 0,
+      "forks": 0,
       "languages": {
         "HTML": 16213,
         "CSS": 5264,
@@ -163,6 +180,7 @@
       "name": "Web-technology-5-assignment",
       "fork": false,
       "stars": 0,
+      "forks": 0,
       "languages": {
         "JavaScript": 21008,
         "HTML": 11477,
@@ -173,6 +191,7 @@
       "name": "Web-technology-Assignment3",
       "fork": false,
       "stars": 0,
+      "forks": 0,
       "languages": {
         "HTML": 10826,
         "CSS": 2289
@@ -180,11 +199,11 @@
     }
   ],
   "calendar": {
-    "total": 121,
-    "activeDays": 15
+    "total": 122,
+    "activeDays": 16
   },
   "contributions": {
-    "totalContributions": 121,
+    "totalContributions": 122,
     "days": [
       {
         "date": "2025-11-02",
@@ -1644,13 +1663,13 @@
       },
       {
         "date": "2026-11-01",
-        "count": 0
+        "count": 1
       }
     ]
   },
   "sources": {
     "profile": "https://api.github.com/users/Abenovv",
-    "calendar": "https://api.github.com/graphql",
+    "calendar": "https://github-contributions-api.jogruber.de/v4/Abenovv?y=last",
     "languages": "GitHub language bytes; owned public non-forks; generated profile excluded"
   }
 }

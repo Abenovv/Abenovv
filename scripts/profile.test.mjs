@@ -3,6 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {aggregateLanguages, validateCalendar} from './data.mjs';
 import {requestJson} from './http.mjs';
+import {projectCounts} from './showcase-assets.mjs';
 import {readFile} from 'node:fs/promises';
 import {spawnSync} from 'node:child_process';
 
@@ -50,6 +51,13 @@ test('data requests cannot send headers to an unexpected host',async()=>{
   let called=false;
   await assert.rejects(requestJson('https://example.com/',{fetchImpl:async()=>{called=true;}}));
   assert.equal(called,false);
+});
+test('showcase never invents counts or presents a fork as an original project',()=>{
+  const project={repository:'quiz-maker-obsidian-edition'};
+  assert.deepEqual(projectCounts(project,{repositories:[{name:project.repository,stars:2,forks:3,fork:false}]}),{stars:2,forks:3});
+  for(const repo of [undefined,{name:project.repository,stars:0,forks:0,fork:true},{name:project.repository,stars:0}]) {
+    assert.throws(()=>projectCounts(project,{repositories:repo?[repo]:[]}));
+  }
 });
 test('render rebuilds deterministically from explicit content sources',async()=>{
   const root=new URL('../',import.meta.url);

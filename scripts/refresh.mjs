@@ -19,7 +19,7 @@ for(let page=1;page<=30;page++) {
   if(!Array.isArray(batch)) throw new Error('Invalid repository response');
   for(const repo of batch) {
     if(repo.private || repo.owner.login.toLowerCase()!==USERNAME.toLowerCase()) throw new Error('Unexpected repository');
-    repos.push({name:repo.name,fork:repo.fork,stars:repo.stargazers_count,languages:{}});
+    repos.push({name:repo.name,fork:repo.fork,stars:repo.stargazers_count,forks:repo.forks_count,languages:{}});
   }
   if(batch.length<100) break;
   if(page===30) throw new Error('Repository pagination limit');

@@ -2,6 +2,8 @@
 
 ## Current personal profile and automatic refresh
 
+The current showcase restores the original cobalt illustration, visible Devicon language tiles, GitAscii language charts, blue metrics panels and animated accents. The Open Source grid uses locally authored focus/technology/repository badges; stars and forks come from the corresponding public repositories, refreshed by the existing workflow. Project selection and coursework labels are explicit in content/projects.json. The owner supplied affaan-m's project-grid screenshot as a layout reference; none of that developer's projects, achievements or statistics is claimed here.
+
 The current project preview is an unchanged native Obsidian capture from `docs/images/obsidian-practice.png` in the user's public Quiz maker repository. Older browser-preview assets below are retained as prior revisions. The static contribution calendar uses the same dated records as the dashboard; the README selects it for reduced motion.
 
 The current README uses native GitHub text and a cropped photograph of the profile owner. The original photograph remains local; `assets/portrait-photo.jpg` is a locally created head-and-shoulders crop with a restrained navy frame, without synthetic facial changes. The optional `portrait-blue.svg` and saved ASCII lines were made with GitAscii's real canvas converter. Source revisions, modifications, and full GPL/MIT license texts for GitAscii and Mauro de Souza's Profile Readme Generator are retained in [scripts/vendor](scripts/vendor/SOURCES.md). The profile composition scripts are GPL-3.0-or-later. The portrait and biography remain the owner's personal content.

@@ -6,10 +6,12 @@ import {renderLanguages} from './vendor/gitascii/LanguagesRenderer.ts';
 import {escapeXml as esc} from './vendor/gitascii/xmlUtils.ts';
 import {socialsSectionParser} from './vendor/profile-readme-generator/socials.ts';
 import {buildMotionAssets} from './motion-assets.mjs';
+import {buildShowcaseAssets,projectCounts} from './showcase-assets.mjs';
 
 const root=new URL('../',import.meta.url);
 const read=path=>readFile(new URL(path,root),'utf8');
 const data=JSON.parse(await read('assets/profile-data.json'));
+const projects=JSON.parse(await read('content/projects.json'));
 const assetVersion=async path=>{
   const bytes=await readFile(new URL(path,root));
   const content=path.endsWith('.svg')?Buffer.from(bytes.toString('utf8').replace(/\r\n/g,'\n')):bytes;
@@ -46,6 +48,7 @@ await writeFile(new URL('assets/contribution-static.svg',root),svg(800,116,
 await writeFile(new URL('assets/snake-title.svg',root),svg(800,16,'Blue line',
   '<path d="M16 8H784" stroke="#254365"/>'));
 await buildMotionAssets(root);
+await buildShowcaseAssets(root,data,projects);
 
 // Use the generator's native social HTML with the established navy assets.
 const socials=socialsSectionParser({content:{socials:{
@@ -62,11 +65,23 @@ const [about,project,background,contact,otherWork]=await Promise.all([
   read('content/contact.html'),read('content/other-work.html')
 ]);
 const portraitUrl=await assetVersion('assets/portrait-photo.jpg');
+const heroUrl=await assetVersion('assets/developer-blue-v2.png');
 const introUrl=await assetVersion('assets/intro-motion.svg');
 const introStillUrl=await assetVersion('assets/intro-static.svg');
 const staticUrl=await assetVersion('assets/contribution-static.svg');
 const snakeUrl=await assetVersion('assets/contribution-snake.svg');
 const number=value=>Number(value).toLocaleString('en-US');
+const metricsUrl=await assetVersion('assets/showcase/metrics.svg');
+const metricsMobileUrl=await assetVersion('assets/showcase/metrics-mobile.svg');
+const cellsHtml=await Promise.all(projects.map(async project=>{
+  const url=`https://github.com/Abenovv/${project.repository}`;
+  const counts=projectCounts(project,data);
+  const focus=await assetVersion(`assets/showcase/${project.id}-focus.svg`);
+  const technology=await assetVersion(`assets/showcase/${project.id}-technology.svg`);
+  const stats=await assetVersion(`assets/showcase/${project.id}-stats.svg`);
+  return `<td width="50%" valign="top"><h3><a href="${url}">${esc(project.title)}</a></h3><p>${esc(project.description)}</p><p><img src="${focus}" alt="Focus: ${esc(project.focus)}" width="100%" /></p><p><img src="${technology}" alt="${esc(project.technology)}" width="100%" /></p><p><a href="${url}/stargazers"><img src="${stats}" alt="${counts.stars} stars and ${counts.forks} forks" width="100%" /></a></p><p><strong>${esc(project.kind)}</strong> · <a href="${url}${project.action.path}">${esc(project.action.label)}</a></p></td>`;
+}));
+const projectGrid=`<table width="100%"><tbody><tr>${cellsHtml.join('')}</tr></tbody></table>`;
 const languageTotal=Object.values(data.languages).reduce((sum,bytes)=>sum+bytes,0)||1;
 const languageRows=Object.entries(data.languages).map(([name,bytes])=>`<tr><td>${esc(name)}</td><td>${(bytes/languageTotal*100).toFixed(1)}%</td></tr>`).join('');
 const languageIcons=['java','javascript','csharp','cpp','python','typescript'];
@@ -74,9 +89,9 @@ const languageNames=['Java','JavaScript','C#','C++','Python','TypeScript'];
 const icons=(await Promise.all(languageIcons.map(async(id,i)=>`<img src="${await assetVersion(`assets/languages/${id}.svg`)}" alt="${languageNames[i]}" title="${languageNames[i]}" width="44" height="44" />`))).join(' ');
 
 const readme=`<!-- Generated from content/ and public profile data. See PROFILE-AUTOMATION.md for maintenance. -->
-<h1 align="center">Yerkebulan Abenov</h1>
-<p align="center">Computer Science student · Software developer</p>
-<p align="center"><img src="${portraitUrl}" alt="Yerkebulan Abenov" width="180" height="225" /></p>
+<h1>Yerkebulan Abenov</h1>
+<p><strong>Software developer · Computer Science student</strong></p>
+<p><img src="${heroUrl}" alt="Cobalt code brackets and glass study cards on a midnight-blue background" width="100%" /></p>
 
 ${socials}
 
@@ -84,22 +99,23 @@ ${socials}
 
 ${about.trim()}
 
+<h2>Open Source</h2>
+${projectGrid}
 ${project.trim()}
 
-${otherWork.trim()}
-
-<h2>Languages</h2>
+<h2>Skills</h2>
 <p>${icons}</p>
 
-${background.trim()}
-
 <h2>Activity</h2>
-<p><strong>${number(data.user.public_repos)}</strong> public repositories · <strong>${number(data.calendar.total)}</strong> public contributions in the past year · <strong>${number(data.user.followers)}</strong> followers</p>
+<picture><source media="(max-width: 600px)" srcset="${metricsMobileUrl}" /><img src="${metricsUrl}" alt="${number(data.user.public_repos)} public repositories; ${number(data.calendar.total)} public contributions in the past year; ${number(data.calendar.activeDays)} active days" width="100%" /></picture>
 <p><a href="${staticUrl}" title="View without animation"><picture><source media="(prefers-reduced-motion: reduce)" srcset="${staticUrl}" /><img src="${snakeUrl}" alt="My GitHub contributions over the past year, animated in blue" width="100%" /></picture></a></p>
 <details>
 <summary><strong>Languages across my projects</strong></summary>
+<picture><source media="(max-width: 600px)" srcset="${await assetVersion('assets/dashboard-phone.svg')}" /><img src="${await assetVersion('assets/dashboard.svg')}" alt="Languages used in my public projects" width="100%" /></picture>
 <table><thead><tr><th>Language</th><th>Share</th></tr></thead><tbody>${languageRows}</tbody></table>
 </details>
+
+${background.trim().replace('<summary><strong>Education &amp; community</strong></summary>',`<summary><strong>More about me</strong></summary><p><img src="${portraitUrl}" alt="Yerkebulan Abenov" width="160" height="200" /></p>`)}
 
 ${contact.trim()}
 `;

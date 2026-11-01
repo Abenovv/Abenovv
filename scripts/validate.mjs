@@ -53,5 +53,16 @@ for(const target of ['linkedin.com/in/yerkebulanabenov','t.me/abenovv_7','mailto
 assert(!/^ {4,}<a href=/m.test(readme),'Indented social HTML would become a Markdown code block on GitHub');
 assert(readme.includes('(prefers-reduced-motion: reduce)'));
 assert(readme.includes('#inside-obsidian')&&!readme.includes('#appearance'));
-assert(new RegExp(`\\b${data.calendar.total}\\s+(?:public\\s+)?contributions\\b`).test(nativeText.replaceAll(',','')),'Native contribution metric must refresh with the data');
+assert(new RegExp(`\\b${data.calendar.total}\\s+(?:public\\s+)?contributions\\b`).test(readme.replaceAll(',','')),'Accessible contribution metric must refresh with the data');
+assert(readme.includes('<h2>Open Source</h2>'),'Project showcase heading missing');
+assert(readme.includes('assets/developer-blue-v2.png'),'Approved cobalt artwork must remain visible');
+assert(readme.includes('assets/showcase/metrics.svg'),'Styled metrics must remain visible');
+const projects=JSON.parse(await read('content/projects.json'));
+for(const project of projects) {
+  const repo=data.repositories.find(repo=>repo.name===project.repository);
+  assert(repo&&!repo.fork,'Selected projects must be verified public originals');
+  assert(readme.includes(`github.com/Abenovv/${project.repository}`));
+  const stats=await read(`assets/showcase/${project.id}-stats.svg`);
+  assert(stats.includes(`<title>${repo.stars} stars · ${repo.forks} forks</title>`),'Repository badge counts must match source');
+}
 console.log(`PASS: readable native profile; real portrait; ${refs} valid image references and versions; approved links; reconciled public metrics; self-contained SVGs.`);
