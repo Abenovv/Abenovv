@@ -45,3 +45,13 @@ for node in intro_motion.iter():
     seconds = lambda value: float(value[1]) / (1000 if value[2] == "ms" else 1)
     assert seconds(duration) + seconds(begin) <= 5, "Intro should finish within five seconds"
 print(f"PASS: {count} SVGs parse; finite intro with static fallback; no duplicate IDs or external image dependencies; static calendar matches all dated records.")
+
+portrait_static=ET.parse(root / "assets/portrait-full.svg").getroot()
+portrait_motion=ET.parse(root / "assets/portrait-full-motion.svg").getroot()
+assert portrait_static.attrib["viewBox"] == portrait_motion.attrib["viewBox"] == "0 0 866 1154"
+assert not any(n.tag.split("}")[-1].lower() in animation_tags for n in portrait_static.iter())
+for n in portrait_motion.iter():
+    if n.tag.split("}")[-1].lower() in animation_tags:
+        assert n.attrib.get("repeatCount", "1") == "1"
+        assert float(n.attrib["dur"].rstrip("s")) + float(n.attrib.get("begin", "0s").rstrip("s")) <= 5
+print("PASS: complete portrait proportions, static alternative and finite light sweep.")

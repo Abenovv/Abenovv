@@ -4,25 +4,15 @@
     "repository": "quiz-maker-obsidian-edition",
     "title": "Quiz maker",
     "description": "Quizzes and flashcards from your Obsidian notes.",
-    "focus": "LEARNING TOOLS",
-    "focusMobile": "STUDY TOOLS",
+    "focus": "OBSIDIAN | STUDY TOOLS",
+    "focusMobile": "OBSIDIAN | STUDY TOOLS",
     "technology": "TypeScript + React",
     "technologyMobile": "TS + React",
     "kind": "Released plugin",
-    "color": "#168fe0",
-    "action": {"label": "Download", "path": "/releases/latest"}
-  },
-  {
-    "id": "browser-projects",
-    "repository": "Web-technology-5-assignment",
-    "title": "Browser projects",
-    "description": "A number game, Kanban board, and live character builder.",
-    "focus": "WEB INTERFACES",
-    "focusMobile": "WEB INTERFACES",
-    "technology": "JavaScript + HTML + CSS",
-    "technologyMobile": "JS + HTML + CSS",
-    "kind": "Coursework",
-    "color": "#4966d9",
-    "action": {"label": "Explore", "path": ""}
+    "color": "#0ea5e9",
+    "action": {
+      "label": "Download",
+      "path": "/releases/latest"
+    }
   }
 ]

@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Native GitHub presentation, GitAscii data assets, and Mauro's social parser.
+// Native rectangular GitHub presentation, GitAscii assets, and Mauro's technology parser.
 import {readFile, writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {renderLanguages} from './vendor/gitascii/LanguagesRenderer.ts';
 import {escapeXml as esc} from './vendor/gitascii/xmlUtils.ts';
-import {socialsSectionParser} from './vendor/profile-readme-generator/socials.ts';
+import {techsSectionParser} from './vendor/profile-readme-generator/techs.ts';
+import {rankedLanguages} from './layout.mjs';
 import {buildMotionAssets} from './motion-assets.mjs';
 import {buildShowcaseAssets,projectCounts} from './showcase-assets.mjs';
 
@@ -50,78 +51,42 @@ await writeFile(new URL('assets/snake-title.svg',root),svg(800,16,'Blue line',
 await buildMotionAssets(root);
 await buildShowcaseAssets(root,data,projects);
 
-// Use the generator's native social HTML with the established navy assets.
-const socials=socialsSectionParser({content:{socials:{
-  linkedin:{link:'https://www.linkedin.com/in/yerkebulanabenov/'},
-  telegram:{link:'https://t.me/abenovv_7'},gmail:{link:'mailto:yerkebulanabenov7@gmail.com'},
-  youtube:{link:'https://www.youtube.com/@Abenovv.7'},instagram:{link:'https://www.instagram.com/abenov.yerkebulan/'}
-},styles:{type:'badge',style:'default',height:26}},styles:{align:'center',spacing:0}})
-  .replace(/\n\s*/g,'').trim().replaceAll('assets/socials/','assets/badges/')
-  .replaceAll('gmail.svg','email.svg').replaceAll('gmail logo','Email').replaceAll(' logo','')
-  .replaceAll('</a><a','</a> <a');
-
-const [about,project,background,contact,otherWork]=await Promise.all([
-  read('content/about.html'),read('content/project.html'),read('content/background.html'),
-  read('content/contact.html'),read('content/other-work.html')
-]);
-const portraitUrl=await assetVersion('assets/portrait-photo.jpg');
-const heroUrl=await assetVersion('assets/developer-blue-v2.png');
-const introUrl=await assetVersion('assets/intro-motion.svg');
-const introStillUrl=await assetVersion('assets/intro-static.svg');
+// The technology parser preserves real icon assets; ordering follows refreshed public code bytes.
+const ranked=rankedLanguages(data.languages);
+const iconProviders=Object.fromEntries(await Promise.all(ranked.map(async({name,icon})=>[
+  name,{providers:[{path:await assetVersion(`assets/languages/${icon}.svg`)}],currentProvider:0,config:{}}
+])));
+const icons=techsSectionParser({content:{icons:iconProviders,styles:{height:32}},styles:{align:'left',spacing:4}})
+  .replace(/\n\s*/g,'').trim();
+const [about,background]=await Promise.all([read('content/about.html'),read('content/background.html')]);
+const portraitMotion=await assetVersion('assets/portrait-full-motion.svg');
+const portraitStatic=await assetVersion('assets/portrait-full.png');
 const staticUrl=await assetVersion('assets/contribution-static.svg');
 const snakeUrl=await assetVersion('assets/contribution-snake.svg');
-const number=value=>Number(value).toLocaleString('en-US');
-const metricsUrl=await assetVersion('assets/showcase/metrics.svg');
-const metricsMobileUrl=await assetVersion('assets/showcase/metrics-mobile.svg');
-const cellsHtml=await Promise.all(projects.map(async project=>{
+const projectCells=await Promise.all(projects.map(async project=>{
   const url=`https://github.com/Abenovv/${project.repository}`;
   const counts=projectCounts(project,data);
   const focus=await assetVersion(`assets/showcase/${project.id}-focus.svg`);
-  const technology=await assetVersion(`assets/showcase/${project.id}-technology.svg`);
-  const stats=await assetVersion(`assets/showcase/${project.id}-stats.svg`);
-  const focusMobile=await assetVersion(`assets/showcase/${project.id}-focus-mobile.svg`);
-  const technologyMobile=await assetVersion(`assets/showcase/${project.id}-technology-mobile.svg`);
-  const statsMobile=await assetVersion(`assets/showcase/${project.id}-stats-mobile.svg`);
-  const badge=(desktop,mobile,alt,height)=>`<picture><source media="(max-width: 600px)" srcset="${mobile}" /><img src="${desktop}" alt="${esc(alt)}" width="100%" height="${height}" /></picture>`;
-  return `<td width="50%" valign="top"><h3><a href="${url}">${esc(project.title)}</a></h3><p>${esc(project.description)}</p><p>${badge(focus,focusMobile,`Focus: ${project.focus}`,28)}</p><p>${badge(technology,technologyMobile,project.technology,24)}</p><p><a href="${url}/stargazers">${badge(stats,statsMobile,`${counts.stars} stars and ${counts.forks} forks`,22)}</a></p><p><strong>${esc(project.kind)}</strong> · <a href="${url}${project.action.path}">${esc(project.action.label)}</a></p></td>`;
+  const mobile=await assetVersion(`assets/showcase/${project.id}-focus-mobile.svg`);
+  const stars=await assetVersion(`assets/showcase/${project.id}-stars.svg`);
+  const forks=await assetVersion(`assets/showcase/${project.id}-forks.svg`);
+  return `<td valign="top"><a href="${url}"><b>${esc(project.title)}</b></a><br /><sub>${esc(project.description)} · <a href="${url}${project.action.path}">${esc(project.action.label)}</a></sub><br /><picture><source media="(max-width: 600px)" srcset="${mobile}" /><img src="${focus}" height="35" alt="Focus: ${esc(project.focus)}" /></picture><br /><a href="${url}/stargazers"><img src="${stars}" height="24" alt="${counts.stars} stars" /></a> <a href="${url}/forks"><img src="${forks}" height="24" alt="${counts.forks} forks" /></a></td>`;
 }));
-const projectGrid=`<table width="100%"><tbody><tr>${cellsHtml.join('')}</tr></tbody></table>`;
-const languageTotal=Object.values(data.languages).reduce((sum,bytes)=>sum+bytes,0)||1;
-const languageRows=Object.entries(data.languages).map(([name,bytes])=>`<tr><td>${esc(name)}</td><td>${(bytes/languageTotal*100).toFixed(1)}%</td></tr>`).join('');
-const languageIcons=['java','javascript','csharp','cpp','python','typescript'];
-const languageNames=['Java','JavaScript','C#','C++','Python','TypeScript'];
-const icons=(await Promise.all(languageIcons.map(async(id,i)=>`<img src="${await assetVersion(`assets/languages/${id}.svg`)}" alt="${languageNames[i]}" title="${languageNames[i]}" width="44" height="44" />`))).join(' ');
-
+const number=value=>Number(value).toLocaleString('en-US');
 const readme=`<!-- Generated from content/ and public profile data. See PROFILE-AUTOMATION.md for maintenance. -->
-<h1>Yerkebulan Abenov</h1>
-<p><strong>Software developer · Computer Science student</strong></p>
-<p><img src="${heroUrl}" alt="Cobalt code brackets and glass study cards on a midnight-blue background" width="100%" /></p>
-
-${socials}
-
-<picture><source media="(prefers-reduced-motion: reduce)" srcset="${introStillUrl}" /><img src="${introUrl}" alt="" width="100%" height="48" /></picture>
-
-${about.trim()}
+<table width="100%"><tbody><tr>
+<td width="28%" valign="top"><a href="${portraitStatic}"><picture><source media="(prefers-reduced-motion: reduce)" srcset="${portraitStatic}" /><img src="${portraitMotion}" alt="Yerkebulan Abenov, full supplied portrait in blue ASCII, including shoulders and jacket" width="100%" /></picture></a></td>
+<td valign="middle"><h1>Yerkebulan Abenov</h1><p><strong>Developer · Computer Science student</strong><br /><sub>Astana, Kazakhstan</sub></p>${about.trim()}<p><strong>Languages</strong></p>${icons}</td>
+</tr></tbody></table>
 
 <h2>Open Source</h2>
-${projectGrid}
-${project.trim()}
-
-<h2>Skills</h2>
-<p>${icons}</p>
+<table><tbody><tr>${projectCells.join('')}</tr></tbody></table>
 
 <h2>Activity</h2>
-<picture><source media="(max-width: 600px)" srcset="${metricsMobileUrl}" /><img src="${metricsUrl}" alt="${number(data.user.public_repos)} public repositories; ${number(data.calendar.total)} public contributions in the past year; ${number(data.calendar.activeDays)} active days" width="100%" /></picture>
+<picture><source media="(max-width: 600px)" srcset="${await assetVersion('assets/showcase/metrics-mobile.svg')}" /><img src="${await assetVersion('assets/showcase/metrics.svg')}" alt="${number(data.user.public_repos)} public repositories; ${number(data.calendar.total)} public contributions in the past year; ${number(data.calendar.activeDays)} active days" width="100%" /></picture>
 <p><a href="${staticUrl}" title="View without animation"><picture><source media="(prefers-reduced-motion: reduce)" srcset="${staticUrl}" /><img src="${snakeUrl}" alt="My GitHub contributions over the past year, animated in blue" width="100%" /></picture></a></p>
-<details>
-<summary><strong>Languages across my projects</strong></summary>
-<picture><source media="(max-width: 600px)" srcset="${await assetVersion('assets/dashboard-phone.svg')}" /><img src="${await assetVersion('assets/dashboard.svg')}" alt="Languages used in my public projects" width="100%" /></picture>
-<table><thead><tr><th>Language</th><th>Share</th></tr></thead><tbody>${languageRows}</tbody></table>
-</details>
 
-${background.trim().replace('<summary><strong>Education &amp; community</strong></summary>',`<summary><strong>More about me</strong></summary><p><img src="${portraitUrl}" alt="Yerkebulan Abenov" width="160" height="200" /></p>`)}
-
-${contact.trim()}
+${background.trim()}
 `;
 await writeFile(new URL('README.md',root),clean(readme));
-console.log('Rendered readable profile, public activity assets, and motion alternatives.');
+console.log('Rendered approved rectangular profile: full portrait, ranked languages, Quiz maker and blue activity.');

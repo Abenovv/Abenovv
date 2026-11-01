@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {aggregateLanguages, validateCalendar} from './data.mjs';
 import {requestJson} from './http.mjs';
 import {projectCounts} from './showcase-assets.mjs';
+import {rankedLanguages} from './layout.mjs';
 import {readFile} from 'node:fs/promises';
 import {spawnSync} from 'node:child_process';
 
@@ -73,4 +74,13 @@ test('render rebuilds deterministically from explicit content sources',async()=>
   assert.equal(run.status,0,run.stderr);
   const after=await Promise.all(files.map(comparable));
   after.forEach((bytes,i)=>assert.deepEqual(bytes,before[i],files[i]));
+});
+
+test('language icons reorder when repository usage changes and keep unobserved stated languages last',()=>{
+  const a=rankedLanguages({TypeScript:10,'C#':30,JavaScript:20});
+  assert.deepEqual(a.slice(0,3).map(x=>x.name),['C#','JavaScript','TypeScript']);
+  const b=rankedLanguages({Java:50,TypeScript:10});
+  assert.equal(b[0].name,'Java');
+  assert.equal(b.find(x=>x.name==='C++').bytes,0);
+  assert.equal(b.length,6);
 });

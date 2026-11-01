@@ -16,36 +16,30 @@ export async function buildShowcaseAssets(root,data,projects) {
   await mkdir(new URL('assets/showcase/',root),{recursive:true});
   for(const project of projects) {
     const counts=projectCounts(project,data);
-    const focus=svg(250,30,`Focus: ${project.focus}`,
-      `<rect width="250" height="30" rx="3" fill="${BG}"/><path d="M3 0H66V30H3Q0 30 0 27V3Q0 0 3 0" fill="${project.color}"/>`+
-      text(33,20,'FOCUS',11,'#fff','text-anchor="middle" font-weight="700" letter-spacing="1"')+
-      text(77,20,project.focus,12,INK,'font-weight="700" letter-spacing=".8"'));
-    const meta=svg(214,24,`${project.technology} · ${project.kind}`,
-      `<rect x=".5" y=".5" width="213" height="23" rx="4" fill="${BG}" stroke="${EDGE}"/>`+
-      text(10,16,project.technology,11,MUTED));
-    const stats=svg(164,24,`${counts.stars} stars · ${counts.forks} forks`,
-      `<rect width="164" height="24" rx="3" fill="#15213a"/><path d="M0 0H38V24H0Z M82 0H121V24H82Z" fill="#273a56"/>`+
-      text(19,16,'stars',11,INK,'text-anchor="middle"')+text(60,16,counts.stars,12,'#83c7ff','text-anchor="middle" font-weight="700"')+
-      text(102,16,'forks',11,INK,'text-anchor="middle"')+text(143,16,counts.forks,12,'#83c7ff','text-anchor="middle" font-weight="700"'));
-    await Promise.all([['focus',focus],['technology',meta],['stats',stats]].map(([name,content])=>writeFile(new URL(`assets/showcase/${project.id}-${name}.svg`,root),content)));
-    const mobileFocus=svg(120,28,`Focus: ${project.focus}`,
-      `<rect width="120" height="28" rx="3" fill="${BG}"/><rect width="4" height="28" rx="2" fill="${project.color}"/>`+
-      text(12,18,project.focusMobile,10,INK,'font-weight="700"'));
-    const mobileTechnology=svg(120,24,project.technology,
-      `<rect x=".5" y=".5" width="119" height="23" rx="3" fill="${BG}" stroke="${EDGE}"/>`+
-      text(6,16,project.technologyMobile,10,MUTED));
-    const mobileStats=svg(120,24,`${counts.stars} stars · ${counts.forks} forks`,
-      `<rect width="120" height="24" rx="3" fill="#15213a"/>`+text(6,16,`${counts.stars} stars / ${counts.forks} forks`,11,'#83c7ff'));
-    await Promise.all([['focus',mobileFocus],['technology',mobileTechnology],['stats',mobileStats]].map(([name,content])=>writeFile(new URL(`assets/showcase/${project.id}-${name}-mobile.svg`,root),content)));
+    for(const [suffix,w,labelWidth,fontSize] of [['',334,80,13],['-mobile',240,64,10.5]]) {
+      const focus=svg(w,35,`Focus: ${project.focus}`,
+        `<rect width="${labelWidth}" height="35" fill="${project.color}"/><rect x="${labelWidth}" width="${w-labelWidth}" height="35" fill="#111827"/>`+
+        text(labelWidth/2,23,'FOCUS',suffix?11:13,'#fff','text-anchor="middle" font-weight="700" letter-spacing="1"')+
+        `<text x="${labelWidth+12}" y="23" font-family="Consolas,monospace" font-size="${fontSize}" font-weight="700" fill="#fff">${esc(project.focus)}</text>`);
+      await writeFile(new URL(`assets/showcase/${project.id}-focus${suffix}.svg`,root),focus);
+    }
+    for(const [label,value,color] of [['stars',counts.stars,'#f59e0b'],['forks',counts.forks,'#60a5fa']]) {
+      const countWidth=Math.max(29,String(value).length*8+16);
+      const badge=svg(45+countWidth,24,`${value} ${label}`,
+        `<rect width="45" height="24" fill="#555"/><rect x="45" width="${countWidth}" height="24" fill="${color}"/>`+
+        text(6,17,label,13,'#fff')+text(45+countWidth/2,17,value,13,'#fff','text-anchor="middle"'));
+      await writeFile(new URL(`assets/showcase/${project.id}-${label}.svg`,root),badge);
+    }
   }
-  for(const width of [800,352]) {
-    const values=[[data.user.public_repos,'Public repos'],[data.calendar.total,'Contributions'],[data.calendar.activeDays,'Active days']];
-    const body=`<rect x=".5" y=".5" width="${width-1}" height="91" rx="8" fill="${BG}" stroke="${EDGE}"/>`+values.map(([value,label],i)=>{
+  for(const width of [1080,352]) {
+    const values=[[data.user.public_repos,'Repositories'],[data.calendar.total,'Contributions'],[data.calendar.activeDays,'Active days']];
+    const height=width>400?70:78;
+    const body=`<rect x=".5" y=".5" width="${width-1}" height="${height-1}" rx="7" fill="${BG}" stroke="${EDGE}"/>`+values.map(([value,label],i)=>{
       const x=(i+.5)*width/3;
-      return (i?`<path d="M${i*width/3} 22V70" stroke="${EDGE}"/>`:'')+
-        text(x,43,Number(value).toLocaleString('en-US'),width>400?30:26,'#80c7ff','text-anchor="middle" font-weight="700"')+
-        text(x,66,label,width>400?13:11,MUTED,'text-anchor="middle"');
+      return (i?`<path d="M${i*width/3} 15V${height-15}" stroke="${EDGE}"/>`:'')+
+        text(x,width>400?30:34,Number(value).toLocaleString('en-US'),23,'#80c7ff','text-anchor="middle" font-weight="700"')+
+        text(x,width>400?51:57,label,width>400?12:10,MUTED,'text-anchor="middle"');
     }).join('');
-    await writeFile(new URL(`assets/showcase/metrics${width<400?'-mobile':''}.svg`,root),svg(width,92,`${data.user.public_repos} public repos, ${data.calendar.total} public contributions, ${data.calendar.activeDays} active days`,body));
+    await writeFile(new URL(`assets/showcase/metrics${width<400?'-mobile':''}.svg`,root),svg(width,height,`${data.user.public_repos} public repos, ${data.calendar.total} public contributions, ${data.calendar.activeDays} active days`,body));
   }
 }

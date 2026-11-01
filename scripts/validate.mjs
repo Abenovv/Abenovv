@@ -3,6 +3,7 @@ import {readFile,access} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {aggregateLanguages,validateCalendar} from './data.mjs';
+import {rankedLanguages} from './layout.mjs';
 const root=new URL('../',import.meta.url);
 const read=path=>readFile(new URL(path,root),'utf8');
 const data=JSON.parse(await read('assets/profile-data.json'));
@@ -36,8 +37,15 @@ for(const m of readme.matchAll(/(?:src|srcset)="(assets\/[^"]+)"/g)) {
     assert.equal(url.searchParams.get('v'),createHash('sha256').update(contents).digest('hex').slice(0,12),`Cached image version does not match ${url.pathname}`);
   }
 }
-assert(refs>=8,'Expected portrait, icons, project preview, activity and motion assets');
-assert(portraits>0,'A real portrait image must be embedded; ASCII alone does not satisfy the requested portrait');
+assert(refs>=12,'Expected full portrait, ranked icons, project badges, activity and motion alternatives');
+assert(portraits>0,'A static full-portrait alternative is required');
+const proof=JSON.parse(await read('assets/portrait-proof.json'));
+assert.deepEqual(proof.crop,{x:0,y:0,width:433,height:577},'Full supplied portrait must not be cropped');
+assert.equal(proof.outputWidth*proof.sourceHeight,proof.outputHeight*proof.sourceWidth,'Portrait proportions changed');
+const portraitPng=await readFile(new URL('assets/portrait-full.png',root));
+assert.equal(portraitPng.readUInt32BE(16),866);assert.equal(portraitPng.readUInt32BE(20),1154);
+const positions=rankedLanguages(data.languages).map(({name})=>readme.indexOf(`alt="${name} logo"`));
+assert(positions.every((position,i)=>position>=0&&(i===0||position>positions[i-1])),'Language icons must follow current repository byte counts');
 for(const m of readme.matchAll(/href="(assets\/[^"]+)"/g)) await access(new URL(m[1],root));
 const svgPaths=new Set(Array.from(readme.matchAll(/(?:src|srcset)="(assets\/[^"?]+\.svg)(?:\?[^"]*)?"/g),m=>m[1]));
 for(const path of svgPaths) {
@@ -49,20 +57,26 @@ for(const path of svgPaths) {
 const notices=await read('scripts/vendor/SOURCES.md');
 assert(notices.includes('maurodesouza/profile-readme-generator')&&notices.includes('Igorcbraz/GitAscii'),'Generator source attribution must remain in maintenance notices');
 for(const license of ['scripts/vendor/gitascii/LICENSE','scripts/vendor/profile-readme-generator/LICENSE.md']) await access(new URL(license,root));
-for(const target of ['linkedin.com/in/yerkebulanabenov','t.me/abenovv_7','mailto:yerkebulanabenov7@gmail.com','youtube.com/@Abenovv.7','instagram.com/abenov.yerkebulan','github.com/Abenovv/quiz-maker-obsidian-edition']) assert(readme.includes(target),`Missing approved link: ${target}`);
-assert(!/^ {4,}<a href=/m.test(readme),'Indented social HTML would become a Markdown code block on GitHub');
+assert(readme.includes('github.com/Abenovv/quiz-maker-obsidian-edition'),'Selected project link missing');
+for(const forbidden of ['linkedin.com','t.me/','mailto:','youtube.com','instagram.com','assets/developer-blue','assets/screens/','Browser projects','More projects'])
+  assert(!readme.includes(forbidden),`Removed content returned: ${forbidden}`);
 assert(readme.includes('(prefers-reduced-motion: reduce)'));
-assert(readme.includes('#inside-obsidian')&&!readme.includes('#appearance'));
+assert(readme.includes('assets/portrait-full-motion.svg'),'Approved full portrait motion missing');
+assert((readme.match(/<table\b/g)||[]).length===2,'Expected rectangular portrait/about and project blocks');
 assert(new RegExp(`\\b${data.calendar.total}\\s+(?:public\\s+)?contributions\\b`).test(readme.replaceAll(',','')),'Accessible contribution metric must refresh with the data');
 assert(readme.includes('<h2>Open Source</h2>'),'Project showcase heading missing');
-assert(readme.includes('assets/developer-blue-v2.png'),'Approved cobalt artwork must remain visible');
+assert(readme.includes('<sub>Quizzes and flashcards from your Obsidian notes.'),'Compact project description missing');
 assert(readme.includes('assets/showcase/metrics.svg'),'Styled metrics must remain visible');
 const projects=JSON.parse(await read('content/projects.json'));
+assert.equal(projects.length,1,'Only Quiz maker was approved');
+assert.equal(projects[0].repository,'quiz-maker-obsidian-edition');
 for(const project of projects) {
   const repo=data.repositories.find(repo=>repo.name===project.repository);
   assert(repo&&!repo.fork,'Selected projects must be verified public originals');
   assert(readme.includes(`github.com/Abenovv/${project.repository}`));
-  const stats=await read(`assets/showcase/${project.id}-stats.svg`);
-  assert(stats.includes(`<title>${repo.stars} stars · ${repo.forks} forks</title>`),'Repository badge counts must match source');
+  for(const [label,count] of [['stars',repo.stars],['forks',repo.forks]]) {
+    const badge=await read(`assets/showcase/${project.id}-${label}.svg`);
+    assert(badge.includes(`<title>${count} ${label}</title>`),'Repository badge counts must match source');
+  }
 }
-console.log(`PASS: readable native profile; real portrait; ${refs} valid image references and versions; approved links; reconciled public metrics; self-contained SVGs.`);
+console.log(`PASS: readable rectangular profile; uncropped full portrait; ranked languages; ${refs} valid image references and versions; only approved project links; reconciled public metrics; self-contained SVGs.`);
