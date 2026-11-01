@@ -199,11 +199,11 @@
     }
   ],
   "calendar": {
-    "total": 122,
+    "total": 123,
     "activeDays": 16
   },
   "contributions": {
-    "totalContributions": 122,
+    "totalContributions": 123,
     "days": [
       {
         "date": "2025-11-02",
@@ -1663,13 +1663,13 @@
       },
       {
         "date": "2026-11-01",
-        "count": 1
+        "count": 2
       }
     ]
   },
   "sources": {
     "profile": "https://api.github.com/users/Abenovv",
-    "calendar": "https://github-contributions-api.jogruber.de/v4/Abenovv?y=last",
+    "calendar": "https://api.github.com/graphql",
     "languages": "GitHub language bytes; owned public non-forks; generated profile excluded"
   }
 }
