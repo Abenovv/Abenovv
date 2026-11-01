@@ -54,3 +54,5 @@ If a new photograph has different dimensions, deliberately update the portrait-f
 - Contribution animation uses the official pinned Platane/snk action with the approved blue palette.
 - Devicon language assets and MIT license are retained under `assets/vendor/devicon`.
 - Software licensing does not license the profile owner's identity or photograph for reuse.
+
+The profile card omits the repeated sidebar name and uses a narrower portrait column with concise copy. The uncropped GitAscii portrait samples 300 × 200 characters; its static PNG is 4330 × 5770 (5× the previous export dimensions). The source photograph remains 433 × 577; exporting larger does not invent photographic detail.

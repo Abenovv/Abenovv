@@ -1,8 +1,7 @@
 <!-- Generated from content/ and public profile data. See PROFILE-AUTOMATION.md for maintenance. -->
-<h1>Yerkebulan Abenov</h1>
 <table width="100%"><tbody><tr>
-<td width="50%" valign="middle" align="center"><a href="assets/portrait-full.png?v=aa2a841c7cfb"><picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/portrait-full.png?v=aa2a841c7cfb" /><img src="assets/portrait-full-motion.svg?v=4b3afddd1869" alt="Yerkebulan Abenov, full supplied portrait in blue ASCII, including shoulders and jacket" width="260" /></picture></a></td>
-<td valign="middle"><p><strong>Developer · Computer Science student</strong><br /><sub>Astana, Kazakhstan</sub></p><p>I’m building Quiz maker for Obsidian alongside my studies at Astana IT University.</p>
+<td width="35%" valign="middle" align="center"><a href="assets/portrait-full.png?v=b3d0ee226779"><picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/portrait-full.png?v=b3d0ee226779" /><img src="assets/portrait-full-motion.svg?v=4c768a5d9335" alt="Yerkebulan Abenov, full supplied portrait in blue ASCII, including shoulders and jacket" width="180" /></picture></a></td>
+<td valign="middle"><p><strong>Developer · Computer Science student</strong><br /><sub>Astana, Kazakhstan</sub></p><p>Building Quiz maker for Obsidian.</p>
 <p>Open to internships, junior roles and open-source collaboration.</p></td>
 </tr></tbody></table>
 <p><strong>Languages</strong> <img src="assets/languages/typescript.svg?v=8e7e79f139c0" height="30" alt="TypeScript logo" />&nbsp;<img src="assets/languages/csharp.svg?v=28669eb182e9" height="30" alt="C# logo" />&nbsp;<img src="assets/languages/javascript.svg?v=701bf63e2fa7" height="30" alt="JavaScript logo" />&nbsp;<img src="assets/languages/java.svg?v=b96948009e3e" height="30" alt="Java logo" />&nbsp;<img src="assets/languages/python.svg?v=a3446698f923" height="30" alt="Python logo" />&nbsp;<img src="assets/languages/cpp.svg?v=3c9fe0ad3294" height="30" alt="C++ logo" /></p>

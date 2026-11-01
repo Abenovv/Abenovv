@@ -18,9 +18,9 @@ for(const image of readme.matchAll(/<img\b([^>]*?)\/?\s*>/g)) {
     assert(/\balt="[^"]*Yerkebulan[^"]*"/i.test(image[1]),'Real portrait needs an identifying accessible label');
 }
 const nativeText=readme.replace(/<!--[\s\S]*?-->/g,'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ');
-assert(/<h1\b|^#\s/m.test(readme),'Identity must use a native heading, not an image alone');
-assert(/Yerkebulan\s+Abenov/i.test(nativeText),'Readable name is missing');
-assert(nativeText.split(' ').length>=60,'Profile needs readable personal/project text outside images');
+assert(!/<h1\b/.test(readme),'Do not repeat the sidebar name above the profile card');
+assert(/Developer.*Computer Science student/.test(nativeText),'Readable role is missing');
+assert(nativeText.split(' ').length>=40,'Profile needs readable personal/project text outside images');
 assert.equal((readme.match(/<details\b/g)||[]).length,(readme.match(/<\/details>/g)||[]).length,'Unbalanced expandable sections');
 assert.equal((readme.match(/<summary\b/g)||[]).length,(readme.match(/<details\b/g)||[]).length,'Every expandable section needs a summary');
 let refs=0;
@@ -43,7 +43,7 @@ const proof=JSON.parse(await read('assets/portrait-proof.json'));
 assert.deepEqual(proof.crop,{x:0,y:0,width:433,height:577},'Full supplied portrait must not be cropped');
 assert.equal(proof.outputWidth*proof.sourceHeight,proof.outputHeight*proof.sourceWidth,'Portrait proportions changed');
 const portraitPng=await readFile(new URL('assets/portrait-full.png',root));
-assert.equal(portraitPng.readUInt32BE(16),866);assert.equal(portraitPng.readUInt32BE(20),1154);
+assert.equal(portraitPng.readUInt32BE(16),4330);assert.equal(portraitPng.readUInt32BE(20),5770);
 const positions=rankedLanguages(data.languages).map(({name})=>readme.indexOf(`alt="${name} logo"`));
 assert(positions.every((position,i)=>position>=0&&(i===0||position>positions[i-1])),'Language icons must follow current repository byte counts');
 for(const m of readme.matchAll(/href="(assets\/[^"]+)"/g)) await access(new URL(m[1],root));
