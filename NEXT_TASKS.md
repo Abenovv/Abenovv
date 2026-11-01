@@ -1,3 +1,3 @@
 # Next tasks
 
-Publish and verify the clean repository and closed snake route. Keep scheduled public-data updates enabled.
+No pending cleanup or route repair. Keep scheduled public-data updates enabled. The approved portrait PNG is the only necessary binary asset.
