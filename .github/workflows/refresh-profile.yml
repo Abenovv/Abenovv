@@ -12,9 +12,7 @@ on:
       - package.json
       - package-lock.json
       - assets/portrait*
-      - assets/badges/**
       - assets/languages/**
-      - assets/screens/**
       - .github/workflows/refresh-profile.yml
 
 permissions:
@@ -40,12 +38,6 @@ jobs:
         run: node scripts/refresh.mjs
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      # Adapted from Mauro's snake workflow; pinned action and blue custom palette.
-      - name: Generate blue contribution snake
-        uses: Platane/snk/svg-only@d8f6715049803e982ee5ff501b6b9b7d5deeb09b # v3
-        with:
-          github_user_name: Abenovv
-          outputs: assets/contribution-snake.svg?color_snake=#74ccff&color_dots=#101e33,#17375e,#245c96,#398fce,#8bd8ff
       - name: Embed the current generated asset versions
         run: node scripts/render.mjs
       - name: Validate generated profile
@@ -57,7 +49,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- README.md assets/contribution-contained.svg assets/dashboard.svg assets/dashboard-mobile.svg assets/dashboard-phone.svg assets/snake-title.svg assets/contribution-snake.svg assets/contribution-static.svg assets/profile-data.json assets/intro-motion.svg assets/intro-static.svg assets/showcase
+          git add -- README.md assets/contribution-route.svg assets/contribution-static.svg assets/profile-data.json assets/showcase
           if ! git diff --cached --quiet; then
             git commit -m 'Refresh public profile metrics and blue snake [skip ci]'
             git push origin HEAD:main

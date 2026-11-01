@@ -1,3 +1,3 @@
 # Next tasks
 
-Verify transparent portrait loading and compact portrait-column alignment after publishing. Keep unapproved comparison candidates local.
+Publish and verify the clean repository and closed snake route. Keep scheduled public-data updates enabled.

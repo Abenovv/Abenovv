@@ -64,7 +64,7 @@ test('render rebuilds deterministically from explicit content sources',async()=>
   const root=new URL('../',import.meta.url);
   const readme=await readFile(new URL('README.md',root),'utf8');
   const referencedImages=Array.from(readme.matchAll(/(?:src|srcset)="(assets\/[^"]+)"/g),m=>m[1].split(/[?#]/)[0]);
-  const files=[...new Set(['README.md','assets/dashboard.svg','assets/dashboard-mobile.svg','assets/dashboard-phone.svg','assets/contribution-static.svg',...referencedImages])];
+  const files=[...new Set(['README.md','assets/contribution-static.svg',...referencedImages])];
   const comparable=async path=>{
     const bytes=await readFile(new URL(path,root));
     return /\.(?:md|svg)$/.test(path)?Buffer.from(bytes.toString('utf8').replace(/\r\n/g,'\n')):bytes;
@@ -85,14 +85,16 @@ test('language icons reorder when repository usage changes and keep unobserved s
   assert.equal(b.length,6);
 });
 
-test('snake containment clips a fixed parent and remains stable on repeated refreshes',async()=>{
-  const {containSnake}=await import('./contain-snake.mjs');
-  const source='<svg><rect class="c" x="2" y="2"/><rect class="c c1" x="34" y="98"/><rect class="s s0" x="0.8" y="0.8"/></svg>';
-  const contained=containSnake(source);
-  assert(contained.includes('<rect x="2" y="2" width="44" height="108"/>'));
-  assert(contained.includes('<g clip-path="url(#snake-grid-clip)"><rect class="s s0"'));
-  assert(contained.includes('viewBox="2 2 44 108"'));
-  assert(contained.includes('overflow="hidden"'));
-  assert.equal(containSnake(contained),contained);
-  assert.throws(()=>containSnake('<svg/>'),/no calendar cells/);
+test('snake route is closed, adjacent, unique and includes every actual calendar date',async()=>{
+ const {calendarRoute,buildSnake}=await import('./snake.mjs');
+ for(const columns of [52,53,54])for(let offset=0;offset<7;offset++){
+  const route=calendarRoute(columns,offset),positions=new Set(route.map(p=>p.join(',')));
+  assert.equal(positions.size,route.length);
+  route.forEach(([x,y],i)=>{assert(x>=0&&x<columns&&y>=0&&y<7);const next=route[(i+1)%route.length];assert.equal(Math.abs(x-next[0])+Math.abs(y-next[1]),1);});
+ }
+ for(const length of [365,366])for(let offset=0;offset<7;offset++){
+  const date=new Date(Date.UTC(2025,0,5+offset));const days=Array.from({length},(_,i)=>({date:new Date(+date+i*86400000).toISOString().slice(0,10),count:i%9}));
+  const svg=buildSnake({contributions:{days},calendar:{total:days.reduce((n,d)=>n+d.count,0)}});
+  assert(!/clipPath|overflow=|mask=/.test(svg));assert.equal((svg.match(/class="snake-segment"/g)||[]).length,4);assert.equal((svg.match(/data-date=/g)||[]).length,length);
+ }
 });

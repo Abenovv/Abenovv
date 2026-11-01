@@ -2,12 +2,10 @@
 // Native rectangular GitHub presentation, GitAscii assets, and Mauro's technology parser.
 import {readFile, writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {renderLanguages} from './vendor/gitascii/LanguagesRenderer.ts';
 import {escapeXml as esc} from './vendor/gitascii/xmlUtils.ts';
 import {techsSectionParser} from './vendor/profile-readme-generator/techs.ts';
-import {containSnake} from './contain-snake.mjs';
+import {buildSnake} from './snake.mjs';
 import {rankedLanguages} from './layout.mjs';
-import {buildMotionAssets} from './motion-assets.mjs';
 import {buildShowcaseAssets,projectCounts} from './showcase-assets.mjs';
 
 const root=new URL('../',import.meta.url);
@@ -20,20 +18,8 @@ const assetVersion=async path=>{
   return `${path}?v=${createHash('sha256').update(content).digest('hex').slice(0,12)}`;
 };
 const clean=text=>text.split('\n').map(line=>line.trimEnd()).join('\n');
-const bg='#091322', edge='#254365', ink='#dceaff', blue='#8acaff';
-const styles={backgroundColor:bg,textColor:ink,accentColor:blue,borderColor:edge,
-  fontFamily:'Arial,Helvetica,sans-serif',borderRadius:8};
+const bg='#091322', edge='#254365';
 const svg=(width,height,title,body)=>`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img"><title>${esc(title)}</title><rect x=".5" y=".5" width="${width-1}" height="${height-1}" rx="8" fill="${bg}" stroke="${edge}"/>${body}</svg>`;
-
-// Retain standalone GitAscii charts for readers who want the repository breakdown.
-// These are supporting assets; biography, role, projects, and skills remain native text.
-for(const [name,width,height] of [['dashboard',800,156],['dashboard-mobile',390,156],['dashboard-phone',320,156]]) {
-  const body=renderLanguages({size:{width,height},config:{langsCount:5,langsLayout:'bars'}},data,styles)
-    .replaceAll("'Inter Tight', sans-serif",'Arial,Helvetica,sans-serif')
-    .replaceAll('#7a7a7a','#a6bbd4')
-    .replace(/<text[^>]*>\[ TOP LANGUAGES \]<\/text>/,'');
-  await writeFile(new URL(`assets/${name}.svg`,root),clean(svg(width,height,'Languages in my public projects',body)));
-}
 
 const days=data.contributions.days;
 const offset=new Date(days[0].date+'T00:00:00Z').getUTCDay();
@@ -46,10 +32,6 @@ const cells=days.map((day,i)=>{
 }).join('');
 await writeFile(new URL('assets/contribution-static.svg',root),svg(800,116,
   `${data.calendar.total} public contributions over the past year`,cells));
-// Keep the previous helper asset valid for existing copies without displaying its caption.
-await writeFile(new URL('assets/snake-title.svg',root),svg(800,16,'Blue line',
-  '<path d="M16 8H784" stroke="#254365"/>'));
-await buildMotionAssets(root);
 await buildShowcaseAssets(root,data,projects);
 
 // The technology parser preserves real icon assets; ordering follows refreshed public code bytes.
@@ -60,13 +42,10 @@ const iconProviders=Object.fromEntries(await Promise.all(ranked.map(async({name,
 const icons=techsSectionParser({content:{icons:iconProviders,styles:{height:30}},styles:{align:'left',spacing:4}})
   .replace(/\n\s*/g,'').trim();
 const [about,background]=await Promise.all([read('content/about.html'),read('content/background.html')]);
-const portraitMotion=await assetVersion('assets/portrait-full-motion.svg');
 const portraitStatic=await assetVersion('assets/portrait-refined-transparent.png');
 const staticUrl=await assetVersion('assets/contribution-static.svg');
-const containedSnake=containSnake(await read('assets/contribution-snake.svg'));
-await writeFile(new URL('assets/contribution-snake.svg',root),containedSnake);
-await writeFile(new URL('assets/contribution-contained.svg',root),containedSnake);
-const snakeUrl=await assetVersion('assets/contribution-contained.svg');
+await writeFile(new URL('assets/contribution-route.svg',root),buildSnake(data));
+const snakeUrl=await assetVersion('assets/contribution-route.svg');
 const projectCells=await Promise.all(projects.map(async project=>{
   const url=`https://github.com/Abenovv/${project.repository}`;
   const counts=projectCounts(project,data);
