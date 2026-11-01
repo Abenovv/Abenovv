@@ -61,7 +61,7 @@ assert(readme.includes('github.com/Abenovv/quiz-maker-obsidian-edition'),'Select
 for(const forbidden of ['linkedin.com','t.me/','mailto:','youtube.com','instagram.com','assets/developer-blue','assets/screens/','Browser projects','More projects'])
   assert(!readme.includes(forbidden),`Removed content returned: ${forbidden}`);
 assert(readme.includes('(prefers-reduced-motion: reduce)'));
-assert(/<img src="assets\/portrait-full\.png\?/.test(readme),'Approved portrait must use the reliable PNG directly');
+assert(/<img src="assets\/portrait-refined-transparent\.png\?/.test(readme),'Approved portrait must use the reliable PNG directly');
 const snake=await read('assets/contribution-snake.svg');
 assert(snake.includes('<g clip-path="url(#snake-grid-clip)">'),'Snake must stay within calendar bounds');
 assert((readme.match(/<table\b/g)||[]).length===2,'Expected rectangular portrait/about and project blocks');

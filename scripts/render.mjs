@@ -61,7 +61,7 @@ const icons=techsSectionParser({content:{icons:iconProviders,styles:{height:30}}
   .replace(/\n\s*/g,'').trim();
 const [about,background]=await Promise.all([read('content/about.html'),read('content/background.html')]);
 const portraitMotion=await assetVersion('assets/portrait-full-motion.svg');
-const portraitStatic=await assetVersion('assets/portrait-full.png');
+const portraitStatic=await assetVersion('assets/portrait-refined-transparent.png');
 const staticUrl=await assetVersion('assets/contribution-static.svg');
 await writeFile(new URL('assets/contribution-snake.svg',root),containSnake(await read('assets/contribution-snake.svg')));
 const snakeUrl=await assetVersion('assets/contribution-snake.svg');
