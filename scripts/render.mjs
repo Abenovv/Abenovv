@@ -75,8 +75,8 @@ const projectCells=await Promise.all(projects.map(async project=>{
 const number=value=>Number(value).toLocaleString('en-US');
 const readme=`<!-- Generated from content/ and public profile data. See PROFILE-AUTOMATION.md for maintenance. -->
 <table width="100%"><tbody><tr>
-<td width="28%" valign="top"><a href="${portraitStatic}"><picture><source media="(prefers-reduced-motion: reduce)" srcset="${portraitStatic}" /><img src="${portraitMotion}" alt="Yerkebulan Abenov, full supplied portrait in blue ASCII, including shoulders and jacket" width="100%" /></picture></a></td>
-<td valign="middle"><h1>Yerkebulan Abenov</h1><p><strong>Developer · Computer Science student</strong><br /><sub>Astana, Kazakhstan</sub></p>${about.trim()}<p><strong>Languages</strong></p>${icons}</td>
+<td valign="top"><a href="${portraitStatic}"><picture><source media="(prefers-reduced-motion: reduce)" srcset="${portraitStatic}" /><img src="${portraitMotion}" alt="Yerkebulan Abenov, full supplied portrait in blue ASCII, including shoulders and jacket" width="220" align="left" /></picture></a>
+<h1>Yerkebulan Abenov</h1><p><strong>Developer · Computer Science student</strong><br /><sub>Astana, Kazakhstan</sub></p>${about.trim()}<p><strong>Languages</strong></p>${icons}</td>
 </tr></tbody></table>
 
 <h2>Open Source</h2>
