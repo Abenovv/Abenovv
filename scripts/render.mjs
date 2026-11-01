@@ -76,7 +76,7 @@ const number=value=>Number(value).toLocaleString('en-US');
 const inlineIcons=icons.replace(/^<div[^>]*>/,'').replace(/<\/div>$/,'').replace(/\s*(&nbsp;)\s*/g,'$1').trim();
 const readme=`<!-- Generated from content/ and public profile data. See PROFILE-AUTOMATION.md for maintenance. -->
 <table width="100%"><tbody><tr>
-<td width="35%" valign="middle" align="center"><a href="${portraitStatic}"><picture><source media="(prefers-reduced-motion: reduce)" srcset="${portraitStatic}" /><img src="${portraitMotion}" alt="Yerkebulan Abenov, full supplied portrait in blue ASCII, including shoulders and jacket" width="180" /></picture></a></td>
+<td width="35%" valign="middle" align="center"><a href="${portraitStatic}"><picture><source media="(prefers-reduced-motion: reduce)" srcset="${portraitStatic}" /><img src="${portraitMotion}" alt="Yerkebulan Abenov, full supplied portrait in refined blue Braille, including shoulders and jacket" width="180" /></picture></a></td>
 <td valign="middle"><p><strong>Developer · Computer Science student</strong><br /><sub>Astana, Kazakhstan</sub></p>${about.trim()}</td>
 </tr></tbody></table>
 <p><strong>Languages</strong> ${inlineIcons}</p>

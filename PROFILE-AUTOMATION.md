@@ -56,3 +56,5 @@ If a new photograph has different dimensions, deliberately update the portrait-f
 - Software licensing does not license the profile owner's identity or photograph for reuse.
 
 The profile card omits the repeated sidebar name and uses a narrower portrait column with concise copy. The uncropped GitAscii portrait samples 300 × 200 characters; its static PNG is 4330 × 5770 (5× the previous export dimensions). The source photograph remains 433 × 577; exporting larger does not invent photographic detail.
+
+Approved portrait update: original refined B, soft-blue eight-dot Braille, generated offline with `node scripts/portrait-braille.mjs <local-source-path>`. Keep the original source private. The 180 × 120 grid preserves the full composition. Static/motion SVGs and the 4330 × 5770 PNG are committed assets; ordinary public-data refresh does not regenerate the portrait. Unapproved comparison candidates are excluded from publication.

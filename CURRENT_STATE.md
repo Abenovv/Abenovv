@@ -1,3 +1,3 @@
 # Current state
 
-Removed the repeated name heading, tightened the portrait/about card, and shortened repeated biography text. Full uncropped portrait: 300 × 200 GitAscii characters, vector motion, 4330 × 5770 static export. Ranked languages, Quiz maker and automatic blue activity remain.
+Approved portrait: original refined B in soft blue Braille, full 433 × 577 source composition; 180 × 120 eight-dot cells and 44,307 dots. No ASCII overlay or hacker/cyan palette. Source image stays local. Offline generator: scripts/portrait-braille.mjs. Profile text, ranked languages, Quiz maker and scheduled activity refresh remain.

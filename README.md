@@ -1,6 +1,6 @@
 <!-- Generated from content/ and public profile data. See PROFILE-AUTOMATION.md for maintenance. -->
 <table width="100%"><tbody><tr>
-<td width="35%" valign="middle" align="center"><a href="assets/portrait-full.png?v=b3d0ee226779"><picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/portrait-full.png?v=b3d0ee226779" /><img src="assets/portrait-full-motion.svg?v=4c768a5d9335" alt="Yerkebulan Abenov, full supplied portrait in blue ASCII, including shoulders and jacket" width="180" /></picture></a></td>
+<td width="35%" valign="middle" align="center"><a href="assets/portrait-full.png?v=51a9744fe9f4"><picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/portrait-full.png?v=51a9744fe9f4" /><img src="assets/portrait-full-motion.svg?v=c39abdecebb7" alt="Yerkebulan Abenov, full supplied portrait in refined blue Braille, including shoulders and jacket" width="180" /></picture></a></td>
 <td valign="middle"><p><strong>Developer · Computer Science student</strong><br /><sub>Astana, Kazakhstan</sub></p><p>Building Quiz maker for Obsidian.</p>
 <p>Open to internships, junior roles and open-source collaboration.</p></td>
 </tr></tbody></table>
