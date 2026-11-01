@@ -56,7 +56,7 @@ const ranked=rankedLanguages(data.languages);
 const iconProviders=Object.fromEntries(await Promise.all(ranked.map(async({name,icon})=>[
   name,{providers:[{path:await assetVersion(`assets/languages/${icon}.svg`)}],currentProvider:0,config:{}}
 ])));
-const icons=techsSectionParser({content:{icons:iconProviders,styles:{height:32}},styles:{align:'left',spacing:4}})
+const icons=techsSectionParser({content:{icons:iconProviders,styles:{height:30}},styles:{align:'left',spacing:4}})
   .replace(/\n\s*/g,'').trim();
 const [about,background]=await Promise.all([read('content/about.html'),read('content/background.html')]);
 const portraitMotion=await assetVersion('assets/portrait-full-motion.svg');
@@ -73,11 +73,14 @@ const projectCells=await Promise.all(projects.map(async project=>{
   return `<td valign="top"><a href="${url}"><b>${esc(project.title)}</b></a><br /><sub>${esc(project.description)} · <a href="${url}${project.action.path}">${esc(project.action.label)}</a></sub><br /><picture><source media="(max-width: 600px)" srcset="${mobile}" /><img src="${focus}" height="35" alt="Focus: ${esc(project.focus)}" /></picture><br /><a href="${url}/stargazers"><img src="${stars}" height="24" alt="${counts.stars} stars" /></a> <a href="${url}/forks"><img src="${forks}" height="24" alt="${counts.forks} forks" /></a></td>`;
 }));
 const number=value=>Number(value).toLocaleString('en-US');
+const inlineIcons=icons.replace(/^<div[^>]*>/,'').replace(/<\/div>$/,'').replace(/\s*(&nbsp;)\s*/g,'$1').trim();
 const readme=`<!-- Generated from content/ and public profile data. See PROFILE-AUTOMATION.md for maintenance. -->
+<h1>Yerkebulan Abenov</h1>
 <table width="100%"><tbody><tr>
-<td valign="top"><a href="${portraitStatic}"><picture><source media="(prefers-reduced-motion: reduce)" srcset="${portraitStatic}" /><img src="${portraitMotion}" alt="Yerkebulan Abenov, full supplied portrait in blue ASCII, including shoulders and jacket" width="220" align="left" /></picture></a>
-<h1>Yerkebulan Abenov</h1><p><strong>Developer · Computer Science student</strong><br /><sub>Astana, Kazakhstan</sub></p>${about.trim()}<p><strong>Languages</strong></p>${icons}</td>
+<td width="50%" valign="middle" align="center"><a href="${portraitStatic}"><picture><source media="(prefers-reduced-motion: reduce)" srcset="${portraitStatic}" /><img src="${portraitMotion}" alt="Yerkebulan Abenov, full supplied portrait in blue ASCII, including shoulders and jacket" width="260" /></picture></a></td>
+<td valign="middle"><p><strong>Developer · Computer Science student</strong><br /><sub>Astana, Kazakhstan</sub></p>${about.trim()}</td>
 </tr></tbody></table>
+<p><strong>Languages</strong> ${inlineIcons}</p>
 
 <h2>Open Source</h2>
 <table><tbody><tr>${projectCells.join('')}</tr></tbody></table>
