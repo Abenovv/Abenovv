@@ -62,7 +62,9 @@ for(const forbidden of ['linkedin.com','t.me/','mailto:','youtube.com','instagra
   assert(!readme.includes(forbidden),`Removed content returned: ${forbidden}`);
 assert(readme.includes('(prefers-reduced-motion: reduce)'));
 assert(/<img src="assets\/portrait-refined-transparent\.png\?/.test(readme),'Approved portrait must use the reliable PNG directly');
-const snake=await read('assets/contribution-snake.svg');
+const snake=await read('assets/contribution-contained.svg');
+assert(readme.includes('assets/contribution-contained.svg'),'Use the fresh contained animation URL');
+assert(/<svg[^>]*overflow="hidden"/.test(snake),'Calendar viewport must hide overflow');
 assert(snake.includes('<g clip-path="url(#snake-grid-clip)">'),'Snake must stay within calendar bounds');
 assert((readme.match(/<table\b/g)||[]).length===2,'Expected rectangular portrait/about and project blocks');
 assert(new RegExp(`\\b${data.calendar.total}\\s+(?:public\\s+)?contributions\\b`).test(readme.replaceAll(',','')),'Accessible contribution metric must refresh with the data');

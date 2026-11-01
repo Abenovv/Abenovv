@@ -57,7 +57,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- README.md assets/dashboard.svg assets/dashboard-mobile.svg assets/dashboard-phone.svg assets/snake-title.svg assets/contribution-snake.svg assets/contribution-static.svg assets/profile-data.json assets/intro-motion.svg assets/intro-static.svg assets/showcase
+          git add -- README.md assets/contribution-contained.svg assets/dashboard.svg assets/dashboard-mobile.svg assets/dashboard-phone.svg assets/snake-title.svg assets/contribution-snake.svg assets/contribution-static.svg assets/profile-data.json assets/intro-motion.svg assets/intro-static.svg assets/showcase
           if ! git diff --cached --quiet; then
             git commit -m 'Refresh public profile metrics and blue snake [skip ci]'
             git push origin HEAD:main

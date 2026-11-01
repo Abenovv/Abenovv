@@ -91,6 +91,8 @@ test('snake containment clips a fixed parent and remains stable on repeated refr
   const contained=containSnake(source);
   assert(contained.includes('<rect x="2" y="2" width="44" height="108"/>'));
   assert(contained.includes('<g clip-path="url(#snake-grid-clip)"><rect class="s s0"'));
+  assert(contained.includes('viewBox="2 2 44 108"'));
+  assert(contained.includes('overflow="hidden"'));
   assert.equal(containSnake(contained),contained);
   assert.throws(()=>containSnake('<svg/>'),/no calendar cells/);
 });

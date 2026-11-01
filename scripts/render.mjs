@@ -63,8 +63,10 @@ const [about,background]=await Promise.all([read('content/about.html'),read('con
 const portraitMotion=await assetVersion('assets/portrait-full-motion.svg');
 const portraitStatic=await assetVersion('assets/portrait-refined-transparent.png');
 const staticUrl=await assetVersion('assets/contribution-static.svg');
-await writeFile(new URL('assets/contribution-snake.svg',root),containSnake(await read('assets/contribution-snake.svg')));
-const snakeUrl=await assetVersion('assets/contribution-snake.svg');
+const containedSnake=containSnake(await read('assets/contribution-snake.svg'));
+await writeFile(new URL('assets/contribution-snake.svg',root),containedSnake);
+await writeFile(new URL('assets/contribution-contained.svg',root),containedSnake);
+const snakeUrl=await assetVersion('assets/contribution-contained.svg');
 const projectCells=await Promise.all(projects.map(async project=>{
   const url=`https://github.com/Abenovv/${project.repository}`;
   const counts=projectCounts(project,data);
