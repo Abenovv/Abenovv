@@ -3,7 +3,7 @@
 import {mkdir,writeFile} from 'node:fs/promises';
 import {escapeXml as esc} from './vendor/gitascii/xmlUtils.ts';
 const BG='#0c1629', INK='#dbedff', MUTED='#9bb3d1', EDGE='#24446a';
-const svg=(w,h,title,body)=>`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><title>${esc(title)}</title>${body}</svg>\n`;
+const svg=(w,h,title,body)=>`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMinYMid meet"><title>${esc(title)}</title>${body}</svg>\n`;
 const text=(x,y,value,size=12,color=INK,extra='')=>`<text x="${x}" y="${y}" font-family="Arial,Helvetica,sans-serif" font-size="${size}" fill="${color}" ${extra}>${esc(String(value))}</text>`;
 export function projectCounts(project,data) {
   const repo=data.repositories.find(repo=>repo.name===project.repository);
@@ -28,6 +28,15 @@ export async function buildShowcaseAssets(root,data,projects) {
       text(19,16,'stars',11,INK,'text-anchor="middle"')+text(60,16,counts.stars,12,'#83c7ff','text-anchor="middle" font-weight="700"')+
       text(102,16,'forks',11,INK,'text-anchor="middle"')+text(143,16,counts.forks,12,'#83c7ff','text-anchor="middle" font-weight="700"'));
     await Promise.all([['focus',focus],['technology',meta],['stats',stats]].map(([name,content])=>writeFile(new URL(`assets/showcase/${project.id}-${name}.svg`,root),content)));
+    const mobileFocus=svg(120,28,`Focus: ${project.focus}`,
+      `<rect width="120" height="28" rx="3" fill="${BG}"/><rect width="4" height="28" rx="2" fill="${project.color}"/>`+
+      text(12,18,project.focusMobile,10,INK,'font-weight="700"'));
+    const mobileTechnology=svg(120,24,project.technology,
+      `<rect x=".5" y=".5" width="119" height="23" rx="3" fill="${BG}" stroke="${EDGE}"/>`+
+      text(6,16,project.technologyMobile,10,MUTED));
+    const mobileStats=svg(120,24,`${counts.stars} stars · ${counts.forks} forks`,
+      `<rect width="120" height="24" rx="3" fill="#15213a"/>`+text(6,16,`${counts.stars} stars / ${counts.forks} forks`,11,'#83c7ff'));
+    await Promise.all([['focus',mobileFocus],['technology',mobileTechnology],['stats',mobileStats]].map(([name,content])=>writeFile(new URL(`assets/showcase/${project.id}-${name}-mobile.svg`,root),content)));
   }
   for(const width of [800,352]) {
     const values=[[data.user.public_repos,'Public repos'],[data.calendar.total,'Contributions'],[data.calendar.activeDays,'Active days']];

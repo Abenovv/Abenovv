@@ -79,7 +79,11 @@ const cellsHtml=await Promise.all(projects.map(async project=>{
   const focus=await assetVersion(`assets/showcase/${project.id}-focus.svg`);
   const technology=await assetVersion(`assets/showcase/${project.id}-technology.svg`);
   const stats=await assetVersion(`assets/showcase/${project.id}-stats.svg`);
-  return `<td width="50%" valign="top"><h3><a href="${url}">${esc(project.title)}</a></h3><p>${esc(project.description)}</p><p><img src="${focus}" alt="Focus: ${esc(project.focus)}" width="100%" /></p><p><img src="${technology}" alt="${esc(project.technology)}" width="100%" /></p><p><a href="${url}/stargazers"><img src="${stats}" alt="${counts.stars} stars and ${counts.forks} forks" width="100%" /></a></p><p><strong>${esc(project.kind)}</strong> · <a href="${url}${project.action.path}">${esc(project.action.label)}</a></p></td>`;
+  const focusMobile=await assetVersion(`assets/showcase/${project.id}-focus-mobile.svg`);
+  const technologyMobile=await assetVersion(`assets/showcase/${project.id}-technology-mobile.svg`);
+  const statsMobile=await assetVersion(`assets/showcase/${project.id}-stats-mobile.svg`);
+  const badge=(desktop,mobile,alt,height)=>`<picture><source media="(max-width: 600px)" srcset="${mobile}" /><img src="${desktop}" alt="${esc(alt)}" width="100%" height="${height}" /></picture>`;
+  return `<td width="50%" valign="top"><h3><a href="${url}">${esc(project.title)}</a></h3><p>${esc(project.description)}</p><p>${badge(focus,focusMobile,`Focus: ${project.focus}`,28)}</p><p>${badge(technology,technologyMobile,project.technology,24)}</p><p><a href="${url}/stargazers">${badge(stats,statsMobile,`${counts.stars} stars and ${counts.forks} forks`,22)}</a></p><p><strong>${esc(project.kind)}</strong> · <a href="${url}${project.action.path}">${esc(project.action.label)}</a></p></td>`;
 }));
 const projectGrid=`<table width="100%"><tbody><tr>${cellsHtml.join('')}</tr></tbody></table>`;
 const languageTotal=Object.values(data.languages).reduce((sum,bytes)=>sum+bytes,0)||1;
