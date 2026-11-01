@@ -45,7 +45,7 @@
 
 <h2>Activity</h2>
 <p><strong>19</strong> public repositories · <strong>121</strong> public contributions in the past year · <strong>4</strong> followers</p>
-<p><a href="assets/contribution-static.svg?v=11d867f5c06b" title="View without animation"><picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/contribution-static.svg?v=11d867f5c06b" /><img src="assets/contribution-snake.svg?v=b6f8f0731d14" alt="My GitHub contributions over the past year, animated in blue" width="100%" /></picture></a></p>
+<p><a href="assets/contribution-static.svg?v=9c0167efb449" title="View without animation"><picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/contribution-static.svg?v=9c0167efb449" /><img src="assets/contribution-snake.svg?v=6b904d96ca94" alt="My GitHub contributions over the past year, animated in blue" width="100%" /></picture></a></p>
 <details>
 <summary><strong>Languages across my projects</strong></summary>
 <table><thead><tr><th>Language</th><th>Share</th></tr></thead><tbody><tr><td>TypeScript</td><td>56.7%</td></tr><tr><td>C#</td><td>21.0%</td></tr><tr><td>CSS</td><td>9.5%</td></tr><tr><td>HTML</td><td>7.3%</td></tr><tr><td>JavaScript</td><td>3.7%</td></tr><tr><td>Java</td><td>1.4%</td></tr><tr><td>Shell</td><td>0.1%</td></tr><tr><td>PowerShell</td><td>0.1%</td></tr><tr><td>C</td><td>0.1%</td></tr><tr><td>Python</td><td>0.1%</td></tr></tbody></table>
