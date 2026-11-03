@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
   "username": "Abenovv",
-  "updatedDate": "2026-11-03",
+  "updatedDate": "2026-11-04",
   "user": {
     "login": "Abenovv",
     "name": "Yerkebulan Abenov",
-    "public_repos": 19,
+    "public_repos": 20,
     "followers": 4,
     "following": 7,
     "public_gists": 0,
@@ -16,9 +16,9 @@
   "languages": {
     "TypeScript": 1159612,
     "C#": 272261,
-    "CSS": 144954,
-    "HTML": 94510,
-    "JavaScript": 67822,
+    "CSS": 154421,
+    "HTML": 132216,
+    "JavaScript": 109908,
     "Java": 18492,
     "Shell": 1745,
     "PowerShell": 1068,
@@ -77,6 +77,17 @@
         "PowerShell": 1068,
         "Shell": 1029,
         "C": 995
+      }
+    },
+    {
+      "name": "Assignment6-Web-technology",
+      "fork": false,
+      "stars": 0,
+      "forks": 0,
+      "languages": {
+        "JavaScript": 42086,
+        "HTML": 37706,
+        "CSS": 9467
       }
     },
     {
@@ -199,11 +210,11 @@
     }
   ],
   "calendar": {
-    "total": 914,
-    "activeDays": 88
+    "total": 919,
+    "activeDays": 89
   },
   "contributions": {
-    "totalContributions": 914,
+    "totalContributions": 919,
     "days": [
       {
         "date": "2025-11-04",
@@ -1663,7 +1674,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 0
+        "count": 5
       }
     ]
   },
