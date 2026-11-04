@@ -1,11 +1,11 @@
 {
   "schemaVersion": 2,
   "username": "Abenovv",
-  "updatedDate": "2026-11-04",
+  "updatedDate": "2026-11-05",
   "user": {
     "login": "Abenovv",
     "name": "Yerkebulan Abenov",
-    "public_repos": 20,
+    "public_repos": 21,
     "followers": 4,
     "following": 7,
     "public_gists": 0,
@@ -16,9 +16,9 @@
   "languages": {
     "TypeScript": 1159612,
     "C#": 272261,
-    "CSS": 154421,
-    "HTML": 132216,
-    "JavaScript": 109908,
+    "HTML": 195031,
+    "JavaScript": 185651,
+    "CSS": 170784,
     "Java": 18492,
     "Shell": 1745,
     "PowerShell": 1068,
@@ -88,6 +88,17 @@
         "JavaScript": 42086,
         "HTML": 37706,
         "CSS": 9467
+      }
+    },
+    {
+      "name": "EndTerm-WebTechnology",
+      "fork": false,
+      "stars": 0,
+      "forks": 0,
+      "languages": {
+        "JavaScript": 75743,
+        "HTML": 62815,
+        "CSS": 16363
       }
     },
     {
@@ -210,11 +221,11 @@
     }
   ],
   "calendar": {
-    "total": 919,
-    "activeDays": 89
+    "total": 927,
+    "activeDays": 90
   },
   "contributions": {
-    "totalContributions": 919,
+    "totalContributions": 927,
     "days": [
       {
         "date": "2025-11-05",
@@ -1550,7 +1561,7 @@
       },
       {
         "date": "2026-10-04",
-        "count": 6
+        "count": 8
       },
       {
         "date": "2026-10-05",
@@ -1674,7 +1685,7 @@
       },
       {
         "date": "2026-11-04",
-        "count": 0
+        "count": 6
       }
     ]
   },
