@@ -10,7 +10,7 @@
 
 <h2>Activity</h2>
 <picture><source media="(max-width: 600px)" srcset="assets/showcase/metrics-mobile.svg?v=aba7d7e0b662" /><img src="assets/showcase/metrics.svg?v=091cf9dce897" alt="21 public repositories; 927 public contributions in the past year; 90 active days" width="100%" /></picture>
-<p><a href="assets/contribution-static.svg?v=213ce8d50c44" title="View without animation"><picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/contribution-static.svg?v=213ce8d50c44" /><img src="assets/contribution-route.svg?v=3721ccc50255" alt="My GitHub contributions over the past year, animated in blue" width="100%" /></picture></a></p>
+<p><a href="assets/contribution-static.svg?v=282a804148d3" title="View without animation"><picture><source media="(prefers-reduced-motion: reduce)" srcset="assets/contribution-static.svg?v=282a804148d3" /><img src="assets/contribution-route.svg?v=44a18fb6b6f9" alt="My GitHub contributions over the past year, animated in blue" width="100%" /></picture></a></p>
 
 <details>
 <summary><strong>Education and community</strong></summary>
