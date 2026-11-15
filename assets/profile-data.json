@@ -5,7 +5,7 @@
   "user": {
     "login": "Abenovv",
     "name": "Yerkebulan Abenov",
-    "public_repos": 23,
+    "public_repos": 20,
     "followers": 5,
     "following": 7,
     "public_gists": 0,
@@ -15,9 +15,9 @@
   "totalStars": 0,
   "languages": {
     "TypeScript": 1159612,
-    "C#": 398579,
-    "JavaScript": 272645,
-    "HTML": 260338,
+    "C#": 420374,
+    "JavaScript": 281260,
+    "HTML": 260484,
     "CSS": 203892,
     "Java": 18492,
     "Shell": 2774,
@@ -102,20 +102,13 @@
       }
     },
     {
-      "name": "expressBookReviews",
-      "fork": true,
-      "stars": 0,
-      "forks": 0,
-      "languages": {}
-    },
-    {
       "name": "Finale-of-ITFP",
       "fork": false,
       "stars": 0,
       "forks": 0,
       "languages": {
-        "C#": 126318,
-        "JavaScript": 13885,
+        "C#": 148113,
+        "JavaScript": 22500,
         "CSS": 9879,
         "HTML": 5940,
         "PowerShell": 1068,
@@ -142,13 +135,6 @@
       }
     },
     {
-      "name": "mcino-Introduction-to-Git-and-GitHub",
-      "fork": true,
-      "stars": 0,
-      "forks": 0,
-      "languages": {}
-    },
-    {
       "name": "Midterm-Web_Technologies-1stTerm",
       "fork": false,
       "stars": 0,
@@ -158,13 +144,6 @@
         "CSS": 11614,
         "JavaScript": 4297
       }
-    },
-    {
-      "name": "obsidian-quiz-generator-new-version",
-      "fork": true,
-      "stars": 0,
-      "forks": 0,
-      "languages": {}
     },
     {
       "name": "quiz-maker-obsidian-edition",
@@ -241,17 +220,17 @@
       "forks": 0,
       "languages": {
         "JavaScript": 73109,
-        "HTML": 59367,
+        "HTML": 59513,
         "CSS": 23229
       }
     }
   ],
   "calendar": {
-    "total": 940,
-    "activeDays": 91
+    "total": 947,
+    "activeDays": 92
   },
   "contributions": {
-    "totalContributions": 940,
+    "totalContributions": 947,
     "days": [
       {
         "date": "2025-11-16",
@@ -1639,11 +1618,11 @@
       },
       {
         "date": "2026-10-28",
-        "count": 6
+        "count": 5
       },
       {
         "date": "2026-10-29",
-        "count": 5
+        "count": 3
       },
       {
         "date": "2026-10-30",
@@ -1711,7 +1690,7 @@
       },
       {
         "date": "2026-11-15",
-        "count": 0
+        "count": 10
       }
     ]
   },
