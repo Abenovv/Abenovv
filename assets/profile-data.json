@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "username": "Abenovv",
-  "updatedDate": "2026-11-15",
+  "updatedDate": "2026-11-16",
   "user": {
     "login": "Abenovv",
     "name": "Yerkebulan Abenov",
@@ -16,9 +16,9 @@
   "languages": {
     "TypeScript": 1159612,
     "C#": 420374,
-    "JavaScript": 281260,
-    "HTML": 260484,
-    "CSS": 203892,
+    "JavaScript": 285651,
+    "HTML": 261251,
+    "CSS": 204119,
     "Java": 18492,
     "Shell": 2774,
     "PowerShell": 2136,
@@ -219,23 +219,19 @@
       "stars": 0,
       "forks": 0,
       "languages": {
-        "JavaScript": 73109,
-        "HTML": 59513,
-        "CSS": 23229
+        "JavaScript": 77500,
+        "HTML": 60280,
+        "CSS": 23456
       }
     }
   ],
   "calendar": {
-    "total": 947,
-    "activeDays": 92
+    "total": 948,
+    "activeDays": 93
   },
   "contributions": {
-    "totalContributions": 947,
+    "totalContributions": 948,
     "days": [
-      {
-        "date": "2025-11-16",
-        "count": 0
-      },
       {
         "date": "2025-11-17",
         "count": 0
@@ -1691,6 +1687,10 @@
       {
         "date": "2026-11-15",
         "count": 10
+      },
+      {
+        "date": "2026-11-16",
+        "count": 1
       }
     ]
   },
