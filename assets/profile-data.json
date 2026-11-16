@@ -1,12 +1,12 @@
 {
   "schemaVersion": 2,
   "username": "Abenovv",
-  "updatedDate": "2026-11-16",
+  "updatedDate": "2026-11-17",
   "user": {
     "login": "Abenovv",
     "name": "Yerkebulan Abenov",
-    "public_repos": 20,
-    "followers": 5,
+    "public_repos": 22,
+    "followers": 4,
     "following": 7,
     "public_gists": 0,
     "created_at": "2024-10-11T04:32:57Z",
@@ -102,6 +102,13 @@
       }
     },
     {
+      "name": "expressBookReviews",
+      "fork": true,
+      "stars": 0,
+      "forks": 0,
+      "languages": {}
+    },
+    {
       "name": "Finale-of-ITFP",
       "fork": false,
       "stars": 0,
@@ -133,6 +140,13 @@
       "languages": {
         "Java": 18492
       }
+    },
+    {
+      "name": "mcino-Introduction-to-Git-and-GitHub",
+      "fork": true,
+      "stars": 0,
+      "forks": 0,
+      "languages": {}
     },
     {
       "name": "Midterm-Web_Technologies-1stTerm",
@@ -226,11 +240,11 @@
     }
   ],
   "calendar": {
-    "total": 948,
+    "total": 952,
     "activeDays": 93
   },
   "contributions": {
-    "totalContributions": 948,
+    "totalContributions": 952,
     "days": [
       {
         "date": "2025-11-17",
@@ -1690,7 +1704,7 @@
       },
       {
         "date": "2026-11-16",
-        "count": 1
+        "count": 5
       }
     ]
   },
